@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Charlotte Carkuff Art</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f2ea;
+      --cream-dark: #ede6d6;
+      --green: #2d4a35;
+      --green-light: #3d6347;
+      --green-muted: #7a9e83;
+      --terracotta: #c4714a;
+      --terracotta-light: #d9957a;
+      --charcoal: #2a2620;
+      --charcoal-soft: #4a4540;
+      --gold: #b89a5a;
+      --white: #fefcf8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--charcoal); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(247, 242, 234, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(45, 74, 53, 0.1);
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.04em; color: var(--green); text-decoration: none; }
+    .nav-logo span { font-weight: 300; font-style: italic; color: var(--terracotta); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal-soft); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--green); }
+    .nav-cta { background: var(--green); color: var(--cream) !important; padding: 0.5rem 1.2rem; border-radius: 2px; }
+    .nav-cta:hover { background: var(--green-light) !important; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 8rem 5rem 3rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(45,74,53,0.12);
+    }
+
+    .page-header-left .label {
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 0.8rem;
+      opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    .page-header-left h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+      font-weight: 300; line-height: 1.1; color: var(--charcoal);
+      opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+
+    .page-header-left h1 em { font-style: italic; color: var(--green); }
+
+    /* filter tabs */
+    .filter-tabs {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s ease 0.35s forwards;
+    }
+
+    .filter-btn {
+      border: 1.5px solid rgba(45,74,53,0.2);
+      background: transparent;
+      color: var(--charcoal-soft);
+      padding: 0.45rem 1.1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover { border-color: var(--green); color: var(--green); }
+    .filter-btn.active { background: var(--green); color: var(--cream); border-color: var(--green); }
+
+    /* ── MASONRY GRID ── */
+    .gallery-wrap {
+      padding: 3rem 5rem 5rem;
+    }
+
+    .masonry {
+      columns: 3;
+      column-gap: 1.2rem;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .gallery-item.visible { opacity: 1; transform: translateY(0); }
+    .gallery-item.hidden { display: none; }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease, filter 0.4s ease;
+      filter: saturate(0.88);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+      filter: saturate(1.1);
+    }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(42,38,32,0.75) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+    }
+
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    .gallery-item-overlay h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .gallery-item-overlay p {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(247,242,234,0.6);
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(42,38,32,0.92);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.open { opacity: 1; pointer-events: all; }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 85vw;
+      max-height: 88vh;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .lightbox-inner img {
+      max-width: 60vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 3px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-info {
+      max-width: 260px;
+      color: var(--cream);
+    }
+
+    .lightbox-info .category {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta-light);
+      margin-bottom: 0.8rem;
+    }
+
+    .lightbox-info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .lightbox-info h2 em { font-style: italic; color: var(--green-muted); }
+
+    .lightbox-info p {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: rgba(247,242,234,0.65);
+      margin-bottom: 1.5rem;
+    }
+
+    .lightbox-info a {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .lightbox-info a:hover { background: var(--terracotta-light); }
+
+    .lightbox-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: rgba(247,242,234,0.6);
+      cursor: pointer;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      font-family: 'Jost', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .lightbox-close:hover { color: var(--cream); }
+
+    /* ── CTA ── */
+    .gallery-cta {
+      text-align: center;
+      padding: 3rem 2rem 6rem;
+      border-top: 1px solid rgba(45,74,53,0.12);
+    }
+
+    .gallery-cta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--charcoal-soft);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      background: var(--green); color: var(--cream); text-decoration: none;
+      padding: 0.85rem 2rem; font-family: 'Jost', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      border-radius: 2px; transition: background 0.2s, transform 0.2s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--charcoal); padding: 3rem 5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-weight: 300; }
+    .footer-logo em { font-style: italic; color: var(--terracotta-light); }
+    .footer-contact a { color: rgba(247,242,234,0.5); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.06em; transition: color 0.2s; display: block; margin-bottom: 0.2rem; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-verse { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: rgba(247,242,234,0.3); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { flex-direction: column; align-items: flex-start; padding: 6rem 2rem 2rem; }
+      .gallery-wrap { padding: 2rem; }
+      .masonry { columns: 2; }
+      .lightbox-inner { flex-direction: column; max-width: 95vw; }
+      .lightbox-inner img { max-width: 90vw; }
+      footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 500px) {
+      .masonry { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Charlotte Carkuff <span>Art</span></a>
+    <ul class="nav-links">
+      <li><a href="gallery.html" class="active">Work</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="commission.html" class="nav-cta">Commission</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <div class="page-header-left">
+      <p class="label">My Work</p>
+      <h1>Art made with<br><em>intention.</em></h1>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="paintings">Paintings</button>
+      <button class="filter-btn" data-filter="clothing">Clothing</button>
+      <button class="filter-btn" data-filter="shoes">Shoes</button>
+    </div>
+  </header>
+
+  <div class="gallery-wrap">
+    <div class="masonry" id="gallery">
+
+      <div class="gallery-item" data-category="paintings" data-title="Segroves" data-desc="Oil on canvas. Available as print.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3540-3-1.jpg" alt="Segroves Painting" />
+        <div class="gallery-item-overlay"><h3>Segroves</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="JT 'Drown' Performance" data-desc="Oil on canvas. Custom commission.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4407-1.jpg" alt="JT 'Drown' Performance Painting" />
+        <div class="gallery-item-overlay"><h3>JT 'Drown' Performance</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="Mom + Pup" data-desc="Oil on canvas. Custom commission.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4837-3.jpg" alt="Mom + Pup Painting" />
+        <div class="gallery-item-overlay"><h3>Mom + Pup</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="JT + JB" data-desc="Oil on canvas. Custom commission.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4828-1.jpg" alt="JT + JB Painting" />
+        <div class="gallery-item-overlay"><h3>JT + JB</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="The Blue Lady" data-desc="Oil on canvas. Available as print.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3219-2-1.jpg" alt="The Blue Lady Painting" />
+        <div class="gallery-item-overlay"><h3>The Blue Lady</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="Smiling Face" data-desc="Oil on canvas. Custom commission.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2026/01/screenshot-2026-01-23-at-12.20.13-pm.png" alt="Smiling Face" />
+        <div class="gallery-item-overlay"><h3>Smiling Face</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="Tyler Durden" data-desc="Oil on canvas. Available as original or print.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_5720.jpg" alt="Tyler Durden Painting" />
+        <div class="gallery-item-overlay"><h3> Tyler Durden</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="Forever and Ever, Amen." data-desc="Oil on canvas. Custom commission">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2026/01/screenshot-2026-01-23-at-12.20.37-pm.png" alt="Forever and Ever, Amen. " />
+        <div class="gallery-item-overlay"><h3>Forever and Ever, Amen.</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="Beth's Flowers" data-desc="Oil on canvas. Custom commission. Available as print.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_2480.jpg" alt="Beth's Flowers" />
+        <div class="gallery-item-overlay"><h3>Beth's Flowers</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="Sweet Eli" data-desc="Oil on canvas. Custom commission.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/07/img_6091-1.jpg" alt="Sweet Eli" />
+        <div class="gallery-item-overlay"><h3>Sweet Eli</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="Big Reputation" data-desc="Oil on canvas. Available as original or print.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_7961-1.jpg" alt="Big Reputation" />
+        <div class="gallery-item-overlay"><h3>Big Reputation</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="BB3" data-desc="Oil on canvas. Custom commission.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/07/img_5911-1.jpg" alt="BB3" />
+        <div class="gallery-item-overlay"><h3>BB3</h3><p>Paintings</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="paintings" data-title="From the Heart" data-desc="Gouache on canvas. Available as original or print.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_5770-1.jpg" alt="From the Heart" />
+        <div class="gallery-item-overlay"><h3>From the Heart</h3><p>Paintings</p></div>
+      </div>
+
+      <!-- CLOTHING ITEMS -->
+      <div class="gallery-item" data-category="clothing" data-title="Lover Jean Jacket" data-desc="Acrylic and fabric paint on denim. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_2735.jpg?strip=info&w=2000" alt="Lover Jean Jacket" />
+        <div class="gallery-item-overlay"><h3>Lover Jean Jacket</h3><p>Clothing</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="clothing" data-title="DragonBallZ Jeans" data-desc="Acrylic and fabric paint on denim. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_2506-2.jpg?strip=info&w=2000" alt="DragonBallZ Jeans" />
+        <div class="gallery-item-overlay"><h3>DragonBallZ Jeans</h3><p>Clothing</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="clothing" data-title="Marvel Nike Sweatshirt" data-desc="Acrylic and fabric paint on denim. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-24-at-10.58.17e280afpm.png?strip=info&w=834" alt="Marvel Nike Sweatshirt" />
+        <div class="gallery-item-overlay"><h3>Marvel Nike Sweatshirt</h3><p>Clothing</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="clothing" data-title="DragonBallZ Jeans" data-desc="Acrylic and fabric paint on denim. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-24-at-11.05.44e280afpm.png?strip=info&w=854" alt="DragonBallZ Jeans" />
+        <div class="gallery-item-overlay"><h3>DragonBallZ Jeans</h3><p>Clothing</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="clothing" data-title="DragonBallZ Jeans" data-desc="Acrylic and fabric paint on denim. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-25-at-4.24.00e280afpm.png?strip=info&w=1408" alt="DragonBallZ Jeans" />
+        <div class="gallery-item-overlay"><h3>DragonBallZ Jeans</h3><p>Clothing</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="clothing" data-title="Heart Jeans" data-desc="Acrylic and fabric paint on denim. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-24-at-10.58.03e280afpm.png?strip=info&w=644" alt="Heart Jeans" />
+        <div class="gallery-item-overlay"><h3>Heart Jeans</h3><p>Clothing</p></div>
+      </div>
+
+       <div class="gallery-item" data-category="clothing" data-title="Pokemon Shirt" data-desc="Acrylic and fabric paint on denim. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-25-at-4.23.44e280afpm.png?strip=info&w=1010" alt="Pokemon Shirt" />
+        <div class="gallery-item-overlay"><h3>Pokemon Shirt</h3><p>Clothing</p></div>
+      </div>
+
+      <!-- SHOES ITEMS -->
+      <div class="gallery-item" data-category="shoes" data-title="Duke Men's Bball Shoes" data-desc="Leather paint on Air Force 1s. Custom commission. Summer 2023.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-24-at-11.21.25e280afpm.png?w=2400&h=" alt="Duke Men's Bball Shoes" />
+        <div class="gallery-item-overlay"><h3>Duke Men's Bball Shoes</h3><p>Shoes</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="shoes" data-title="Duke Men's Bball Shoes" data-desc="Leather paint on Air Force 1s. Custom commission. Summer 2023.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-24-at-11.21.32e280afpm-1.png?w=2400&h=" alt="Duke Men's Bball Shoes" />
+        <div class="gallery-item-overlay"><h3>Duke Men's Bball Shoes</h3><p>Shoes</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="shoes" data-title="Stranger Things Shoes" data-desc="Fabric paint on High Top Converse. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3092.jpg?w=2400&h=" alt="Stranger Things Shoes" />
+        <div class="gallery-item-overlay"><h3>Stranger Things Shoes</h3><p>Shoes</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="shoes" data-title="Stranger Things Shoes" data-desc="Fabric paint on High Top Converse. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3052-1.jpg?w=2400&h=" alt="Stranger Things Shoes" />
+        <div class="gallery-item-overlay"><h3>Stranger Things Shoes</h3><p>Shoes</p></div>
+      </div>
+
+       <div class="gallery-item" data-category="shoes" data-title="Pink Donut Shoes" data-desc="Leather paint on Air Force 1s. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-24-at-10.56.24e280afpm.png?w=2400&h=" alt="Pink Donut Shoes" />
+        <div class="gallery-item-overlay"><h3>Pink Donut Shoes</h3><p>Shoes</p></div>
+      </div>
+
+      <div class="gallery-item" data-category="shoes" data-title="High School Football Shoes" data-desc="Leather paint on Air Force 1s. Custom commission. Summer 2022.">
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/screenshot-2025-03-24-at-10.57.14e280afpm-1.png?w=2400&h=" alt="High School Football Shoes" />
+        <div class="gallery-item-overlay"><h3>High School Football Shoes</h3><p>Shoes</p></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="gallery-cta">
+    <p>Don't see exactly what you're looking for?</p>
+    <a href="commission.html" class="btn-primary">Commission a Custom Piece</a>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightbox-close">✕ Close</button>
+      <img id="lightbox-img" src="" alt="" />
+      <div class="lightbox-info">
+        <p class="category" id="lb-category"></p>
+        <h2 id="lb-title"></h2>
+        <p id="lb-desc"></p>
+        <a href="commission.html">Commission something similar →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Charlotte Carkuff <em>Art</em></div>
+    <div class="footer-contact">
+      <a href="mailto:crcarkuff@gmail.com">crcarkuff@gmail.com</a>
+      <a href="tel:9312241954">(931) 224-1954</a>
+    </div>
+    <p class="footer-verse">"Just as each one has received a gift, use it to serve others, as good stewards of the varied grace of God." — 1 Peter 4:10 (CSB)</p>
+  </footer>
+
+  <script>
+    // Staggered gallery reveal on load
+    const items = document.querySelectorAll('.gallery-item');
+    
+    // Hide non-painting items on page load
+    items.forEach(item => {
+      if (item.dataset.category !== 'paintings') {
+        item.classList.add('hidden');
+      }
+    });
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    items.forEach(item => observer.observe(item));
+
+    // Filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.classList.remove('hidden');
+            setTimeout(() => item.classList.add('visible'), 50);
+          } else {
+            item.classList.add('hidden');
+            item.classList.remove('visible');
+          }
+        });
+      });
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = item.querySelector('img').src;
+        document.getElementById('lightbox-img').alt = item.dataset.title;
+        document.getElementById('lb-category').textContent = item.dataset.category;
+        document.getElementById('lb-title').textContent = item.dataset.title;
+        document.getElementById('lb-desc').textContent = item.dataset.desc;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+</html>

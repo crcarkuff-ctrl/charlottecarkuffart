@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — Charlotte Carkuff Art</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f2ea; --cream-dark: #ede6d6;
+      --green: #2d4a35; --green-light: #3d6347; --green-muted: #7a9e83;
+      --terracotta: #c4714a; --terracotta-light: #d9957a;
+      --charcoal: #2a2620; --charcoal-soft: #4a4540;
+      --gold: #b89a5a; --white: #fefcf8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--charcoal); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem; background: rgba(247, 242, 234, 0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid rgba(45, 74, 53, 0.1);
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.04em; color: var(--green); text-decoration: none; }
+    .nav-logo span { font-weight: 300; font-style: italic; color: var(--terracotta); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal-soft); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--green); }
+    .nav-cta { background: var(--green); color: var(--cream) !important; padding: 0.5rem 1.2rem; border-radius: 2px; }
+    .nav-cta:hover { background: var(--green-light) !important; }
+
+    /* ── HEADER ── */
+    .page-header {
+      padding: 8rem 5rem 3rem;
+      border-bottom: 1px solid rgba(45,74,53,0.12);
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
+    }
+    .page-header .label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.8rem; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+    .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4.5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--charcoal); opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards; }
+    .page-header h1 em { font-style: italic; color: var(--green); }
+    .header-note { font-size: 0.88rem; line-height: 1.7; color: var(--charcoal-soft); max-width: 320px; opacity: 0; animation: fadeUp 0.7s ease 0.35s forwards; }
+    .header-note a { color: var(--terracotta); text-decoration: none; }
+    .header-note a:hover { text-decoration: underline; }
+
+    /* ── SHOP SECTIONS ── */
+    .shop-section { padding: 4rem 5rem; border-bottom: 1px solid rgba(45,74,53,0.08); }
+    .section-heading { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2.5rem; }
+    .section-heading h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--charcoal); }
+    .section-heading h2 em { font-style: italic; color: var(--green); }
+    .section-heading a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); text-decoration: none; transition: opacity 0.2s; }
+    .section-heading a:hover { opacity: 0.7; }
+
+    /* product grid */
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+    .product-card {
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .product-card.visible { opacity: 1; transform: translateY(0); }
+
+    .product-img {
+      position: relative; overflow: hidden; border-radius: 3px;
+      background: var(--cream-dark); aspect-ratio: 4/5;
+      margin-bottom: 1rem; cursor: pointer;
+    }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, filter 0.4s ease; filter: saturate(0.88); display: block; }
+    .product-card:hover .product-img img { transform: scale(1.04); filter: saturate(1.05); }
+
+    .product-badge {
+      position: absolute; top: 0.8rem; left: 0.8rem;
+      background: var(--terracotta); color: var(--white);
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.6rem; border-radius: 2px;
+    }
+
+    .product-badge.sold { background: var(--charcoal-soft); }
+    .product-badge.print { background: var(--green); }
+
+    .product-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.2rem; }
+    .product-info .meta { font-size: 0.75rem; color: var(--charcoal-soft); letter-spacing: 0.05em; margin-bottom: 0.6rem; }
+
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--charcoal); }
+    .product-price .original { text-decoration: line-through; color: var(--charcoal-soft); font-size: 0.9rem; margin-right: 0.4rem; }
+
+    .product-btn {
+      font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.45rem 0.9rem; border-radius: 2px; text-decoration: none; transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+    .product-btn.buy { background: var(--green); color: var(--cream); }
+    .product-btn.buy:hover { background: var(--green-light); }
+    .product-btn.inquire { border: 1.5px solid var(--terracotta); color: var(--terracotta); background: transparent; }
+    .product-btn.inquire:hover { background: var(--terracotta); color: var(--white); }
+    .product-btn.sold-btn { border: 1.5px solid rgba(74,69,64,0.3); color: var(--charcoal-soft); background: transparent; cursor: default; }
+
+    /* ── COMMISSION BANNER ── */
+    .commission-banner {
+      background: var(--green);
+      margin: 0 5rem 5rem;
+      border-radius: 4px;
+      padding: 3.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .commission-banner::before {
+      content: '';
+      position: absolute; top: -30%; right: -5%;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(247,242,234,0.04);
+      pointer-events: none;
+    }
+
+    .commission-banner-text .label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta-light); margin-bottom: 0.8rem; }
+    .commission-banner-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--cream); margin-bottom: 0.8rem; line-height: 1.2; }
+    .commission-banner-text h2 em { font-style: italic; color: var(--gold); }
+    .commission-banner-text p { font-size: 0.88rem; color: rgba(247,242,234,0.7); line-height: 1.7; max-width: 360px; }
+
+    .commission-banner a {
+      display: inline-block; white-space: nowrap;
+      background: var(--terracotta); color: var(--white); text-decoration: none;
+      padding: 0.9rem 2rem; font-family: 'Jost', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      border-radius: 2px; transition: background 0.2s, transform 0.2s; flex-shrink: 0;
+    }
+    .commission-banner a:hover { background: var(--terracotta-light); transform: translateY(-1px); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(42,38,32,0.7); backdrop-filter: blur(3px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--cream); border-radius: 4px; padding: 2.5rem;
+      max-width: 460px; width: 90%; position: relative;
+      transform: translateY(12px); transition: transform 0.3s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--charcoal); margin-bottom: 0.5rem; }
+    .modal h3 em { font-style: italic; color: var(--green); }
+    .modal p { font-size: 0.88rem; color: var(--charcoal-soft); line-height: 1.7; margin-bottom: 1.5rem; }
+    .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; cursor: pointer; color: var(--charcoal-soft); font-size: 1rem; padding: 0.25rem; }
+    .modal-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .modal-btns a { display: inline-block; text-decoration: none; padding: 0.7rem 1.4rem; font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; }
+    .modal-btn-primary { background: var(--green); color: var(--cream); }
+    .modal-btn-primary:hover { background: var(--green-light); }
+    .modal-btn-secondary { border: 1.5px solid var(--terracotta); color: var(--terracotta); }
+    .modal-btn-secondary:hover { background: var(--terracotta); color: var(--white); }
+
+    /* ── PRODUCT LIGHTBOX ── */
+    .product-lightbox {
+      position: fixed; inset: 0; z-index: 250;
+      background: rgba(42,38,32,0.92);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .product-lightbox.open { opacity: 1; pointer-events: all; }
+
+    .product-lightbox-inner {
+      position: relative;
+      max-width: 85vw;
+      max-height: 88vh;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .product-lightbox-inner img {
+      max-width: 50vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 3px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+
+    .product-lightbox-info {
+      max-width: 280px;
+      color: var(--cream);
+    }
+
+    .product-lightbox-info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .product-lightbox-info .meta {
+      font-size: 0.75rem;
+      color: rgba(247,242,234,0.65);
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .product-lightbox-info .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .product-lightbox-info .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .product-lightbox-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: rgba(247,242,234,0.6);
+      cursor: pointer;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      font-family: 'Jost', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .product-lightbox-close:hover { color: var(--cream); }
+
+    footer { background: var(--charcoal); padding: 3rem 5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-weight: 300; }
+    .footer-logo em { font-style: italic; color: var(--terracotta-light); }
+    .footer-contact a { color: rgba(247,242,234,0.5); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.06em; transition: color 0.2s; display: block; margin-bottom: 0.2rem; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-verse { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: rgba(247,242,234,0.3); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { flex-direction: column; padding: 6rem 2rem 2rem; align-items: flex-start; }
+      .shop-section { padding: 3rem 2rem; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+      .commission-banner { margin: 0 2rem 3rem; padding: 2.5rem; flex-direction: column; align-items: flex-start; }
+      footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 500px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Charlotte Carkuff <span>Art</span></a>
+    <ul class="nav-links">
+      <li><a href="gallery.html">Work</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="commission.html" class="nav-cta">Commission</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <div>
+      <p class="label">Shop</p>
+      <h1>Original work,<br><em>ready to love.</em></h1>
+    </div>
+    <p class="header-note">
+      All originals are one-of-a-kind. Prints are available for select pieces. To inquire about a piece or discuss payment, email <a href="mailto:crcarkuff@gmail.com">crcarkuff@gmail.com</a>. Payment via Stripe or PayPal.
+    </p>
+  </header>
+
+  <!-- ORIGINALS -->
+  <section class="shop-section">
+    <div class="section-heading">
+      <h2>Original <em>Paintings</em></h2>
+      <a href="gallery.html">View all work →</a>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536', 'From the Heart', 'Gouache on canvas · 11×14 in', '$130')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536" alt="Original Painting" />
+          <span class="product-badge">Original</span>
+        </div>
+        <div class="product-info">
+          <h3>From the Heart</h3>
+          <p class="meta">Gouache on canvas · 11×14 in</p>
+          <div class="product-footer">
+            <div class="product-price">$130</div>
+            <a href="https://buy.stripe.com/fZudRa5EH7Mq4ckbzXcEw0J" class="product-btn buy">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5720.jpg?w=1536', 'Tyler Durden', 'Oil on canvas · 11×14 in', '$200')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5720.jpg?w=1536" alt="Original Painting" />
+          <span class="product-badge">Original</span>
+        </div>
+        <div class="product-info">
+          <h3>Tyler Durden</h3>
+          <p class="meta">Oil on canvas · 11×14 in</p>
+          <div class="product-footer">
+            <div class="product-price">$200</div>
+            <a href="https://buy.stripe.com/5kA9DD3L38tr9BmeUY" class="product-btn buy">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/t.s.-2.jpg?w=1630', 'Big Reputation', 'Oil on canvas · 12×16 in', '$250')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/t.s.-2.jpg?w=1630" alt="Big Reputation" />
+          <span class="product-badge">Original</span>
+        </div>
+        <div class="product-info">
+          <h3>Big Reputation</h3>
+          <p class="meta">Oil on canvas · 12×16 in</p>
+          <div class="product-footer">
+            <div class="product-price">$250</div>
+            <a href="https://buy.stripe.com/4gw8zz95n5hf8xi28b" class="product-btn buy">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4407-1.jpg', 'JT Drown Performance', 'Oil on canvas · 18×24 in', '$450')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4407-1.jpg" alt="Original Painting" />
+          <span class="product-badge sold">Sold</span>
+        </div>
+        <div class="product-info">
+          <h3>JT 'Drown' Performance</h3>
+          <p class="meta">Oil on canvas · 18×24 in</p>
+          <div class="product-footer">
+            <div class="product-price">$450</div>
+            <button class="product-btn sold-btn" disabled>Sold</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRINTS -->
+  <section class="shop-section">
+    <div class="section-heading">
+      <h2>Art <em>Prints</em></h2>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_5720.jpg', 'Tyler Durden Print', 'Giclee print · 8×10 in · Multiple sizes available', '$35+')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_5720.jpg" alt="Art Print" />
+          <span class="product-badge print">Print</span>
+        </div>
+        <div class="product-info">
+          <h3>Tyler Durden Print</h3>
+          <p class="meta">Giclee print · 8×10 in · Multiple sizes available</p>
+          <div class="product-footer">
+            <div class="product-price">$35+</div>
+            <button class="product-btn buy" onclick="openModal('Tyler Durden Print', '$35+')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3219-2-1.jpg', 'The Blue Lady Print', 'Giclee print · 8×10 in · Multiple sizes available', '$35+')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3219-2-1.jpg" alt="Art Print" />
+          <span class="product-badge print">Print</span>
+        </div>
+        <div class="product-info">
+          <h3>The Blue Lady Print</h3>
+          <p class="meta">Giclee print · 8×10 in · Multiple sizes available</p>
+          <div class="product-footer">
+            <div class="product-price">$35+</div>
+            <button class="product-btn buy" onclick="openModal('The Blue Lady Print', '$35+')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_2480.jpg', 'Beths Flowers Print', 'Giclee print · 8×10 in · Multiple sizes available', '$35+')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_2480.jpg" alt="Art Print" />
+          <span class="product-badge print">Print</span>
+        </div>
+        <div class="product-info">
+          <h3>Beth's Flowers Print</h3>
+          <p class="meta">Giclee print · 8×10 in · Multiple sizes available</p>
+          <div class="product-footer">
+            <div class="product-price">$35+</div>
+            <button class="product-btn buy" onclick="openModal('Beths Flowers Print', '$35+')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+        <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_3540-3.jpg', 'Segroves Print', 'Giclee print · 8×10 in · Multiple sizes available', '$35+')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_3540-3.jpg" alt="Art Print" />
+          <span class="product-badge print">Print</span>
+        </div>
+        <div class="product-info">
+          <h3>Segroves Print</h3>
+          <p class="meta">Giclee print · 8×10 in · Multiple sizes available</p>
+          <div class="product-footer">
+            <div class="product-price">$35+</div>
+            <button class="product-btn buy" onclick="openModal('Segroves Print', '$35+')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/t.s.-2.jpg?w=1630', 'Big Reputation Print', 'Giclee print · 8×10 in · Multiple sizes available', '$35+')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/t.s.-2.jpg?w=1630" alt="Art Print" />
+          <span class="product-badge print">Print</span>
+        </div>
+        <div class="product-info">
+          <h3>Big Reputation Print</h3>
+          <p class="meta">Giclee print · 8×10 in · Multiple sizes available</p>
+          <div class="product-footer">
+            <div class="product-price">$35+</div>
+            <button class="product-btn buy" onclick="openModal('Big Reputation Print', '$35+')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WEARABLES -->
+  <section class="shop-section">
+    <div class="section-heading">
+      <h2>Wearable <em>Art</em></h2>
+    </div>
+    <div style="text-align: center; padding: 3rem 2rem;">
+      <p style="font-size: 1.1rem; line-height: 1.7; color: var(--charcoal-soft); margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        I don't currently have wearable art pieces in stock, but I'd love to create something custom just for you. Whether it's hand-painted clothing, shoes, or another wearable piece, I can bring your vision to life.
+      </p>
+      <a href="commission.html" class="btn-primary" style="background: var(--green); color: var(--cream); text-decoration: none; padding: 0.85rem 2rem; font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; transition: background 0.2s; display: inline-block;">Commission Wearable Art</a>
+    </div>
+  </section>
+
+  <!-- COMMISSION BANNER -->
+  <div class="commission-banner">
+    <div class="commission-banner-text">
+      <p class="label">Can't find what you're looking for?</p>
+      <h2>Commission something<br><em>made just for you.</em></h2>
+      <p>Not sure how to describe what you want? My AI Commission Companion will help you put your ideas into words — then I take it from there.</p>
+    </div>
+    <a href="commission.html">Start a Commission</a>
+  </div>
+
+  <!-- PRODUCT IMAGE LIGHTBOX -->
+  <div class="product-lightbox" id="product-lightbox">
+    <div class="product-lightbox-inner">
+      <button class="product-lightbox-close" id="product-lightbox-close">✕ Close</button>
+      <img id="product-lightbox-img" src="" alt="" />
+      <div class="product-lightbox-info">
+        <h2 id="product-lightbox-title"></h2>
+        <span class="meta" id="product-lightbox-meta"></span>
+        <div class="price" id="product-lightbox-price"></div>
+        <div class="btn-group">
+          <button class="product-btn inquire" id="product-lightbox-inquire" style="width: 100%; text-align: center;">Inquire</button>
+          <button class="product-btn buy" id="product-lightbox-buy" style="width: 100%; text-align: center;">Buy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PURCHASE MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h3>Purchase <em id="modal-title"></em></h3>
+      <p id="modal-body"></p>
+      <div class="modal-btns">
+        <a href="mailto:crcarkuff@gmail.com" class="modal-btn-primary" id="modal-email-btn">Email Charlotte</a>
+        <a href="commission.html" class="modal-btn-secondary">Ask the AI Companion</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Charlotte Carkuff <em>Art</em></div>
+    <div class="footer-contact">
+      <a href="mailto:crcarkuff@gmail.com">crcarkuff@gmail.com</a>
+      <a href="tel:9312241954">(931) 224-1954</a>
+    </div>
+    <p class="footer-verse">"We were created to create." — 1 Peter 4:10</p>
+  </footer>
+
+  <script>
+    // Staggered reveal
+    const cards = document.querySelectorAll('.product-card');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    cards.forEach(c => obs.observe(c));
+
+    // Modal
+    function openModal(title, price) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-body').textContent = `To purchase "${title}" (${price}), email Charlotte directly. She accepts payment via PayPal or Stripe and will confirm availability and arrange shipping with you.`;
+      document.getElementById('modal-email-btn').href = `mailto:crcarkuff@gmail.com?subject=Purchase Inquiry: ${encodeURIComponent(title)}&body=Hi Charlotte! I'm interested in purchasing "${title}" (${price}). Could you confirm availability and share payment details?`;
+      document.getElementById('modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modal-overlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modal-overlay')) closeModal();
+    });
+
+    // Product Lightbox
+    function openProductLightbox(imgSrc, title, meta, price) {
+      document.getElementById('product-lightbox-img').src = imgSrc;
+      document.getElementById('product-lightbox-img').alt = title;
+      document.getElementById('product-lightbox-title').textContent = title;
+      document.getElementById('product-lightbox-meta').textContent = meta;
+      document.getElementById('product-lightbox-price').textContent = price;
+      
+      document.getElementById('product-lightbox-inquire').onclick = () => {
+        closeProductLightbox();
+        openModal(title, price);
+      };
+      
+      document.getElementById('product-lightbox-buy').onclick = () => {
+        closeProductLightbox();
+        openModal(title, price);
+      };
+      
+      document.getElementById('product-lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductLightbox() {
+      document.getElementById('product-lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('product-lightbox-close').addEventListener('click', closeProductLightbox);
+    document.getElementById('product-lightbox').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('product-lightbox')) closeProductLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('product-lightbox').classList.contains('open')) {
+        closeProductLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Charlotte Carkuff Art</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f2ea;
+      --cream-dark: #ede6d6;
+      --green: #2d4a35;
+      --green-light: #3d6347;
+      --green-muted: #7a9e83;
+      --terracotta: #c4714a;
+      --terracotta-light: #d9957a;
+      --charcoal: #2a2620;
+      --charcoal-soft: #4a4540;
+      --gold: #b89a5a;
+      --white: #fefcf8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(247, 242, 234, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(45, 74, 53, 0.1);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    .nav-logo span { font-weight: 300; font-style: italic; color: var(--terracotta); }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal-soft);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--green); }
+    .nav-cta {
+      background: var(--green);
+      color: var(--cream) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 9rem 5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      border-bottom: 1px solid rgba(45,74,53,0.12);
+    }
+
+    .page-header-left .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
+    }
+
+    .page-header-left h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--charcoal);
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.25s forwards;
+    }
+
+    .page-header-left h1 em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .page-header-right {
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    .page-header-right p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      line-height: 1.7;
+      color: var(--charcoal-soft);
+      border-left: 2px solid var(--terracotta);
+      padding-left: 1.5rem;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .about-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    /* Left column: images */
+    .about-images {
+      position: sticky;
+      top: 5rem;
+      height: calc(100vh - 5rem);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 2fr 1fr;
+      gap: 3px;
+      background: var(--green);
+    }
+
+    .about-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.85);
+      transition: filter 0.5s;
+    }
+
+    .about-images img:hover { filter: saturate(1.1); }
+
+    .about-images-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    /* Right column: text */
+    .about-text-col {
+      padding: 5rem;
+    }
+
+    .story-section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .story-section:nth-child(1) { animation-delay: 0.1s; }
+    .story-section:nth-child(2) { animation-delay: 0.2s; }
+    .story-section:nth-child(3) { animation-delay: 0.3s; }
+    .story-section:nth-child(4) { animation-delay: 0.4s; }
+
+    .story-section .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: rgba(45,74,53,0.1);
+      line-height: 1;
+      margin-bottom: -0.5rem;
+    }
+
+    .story-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 1.2rem;
+      line-height: 1.25;
+    }
+
+    .story-section h2 em { font-style: italic; color: var(--green); }
+
+    .story-section p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--charcoal-soft);
+      margin-bottom: 1rem;
+    }
+
+    .scripture-block {
+      background: var(--green);
+      color: var(--cream);
+      padding: 2rem 2.5rem;
+      border-radius: 3px;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scripture-block::before {
+      content: '"';
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+    }
+
+    .scripture-block p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: rgba(247,242,234,0.9);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .scripture-block cite {
+      font-family: 'Jost', sans-serif;
+      font-style: normal;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Fun facts */
+    .fun-facts {
+      background: var(--cream-dark);
+      border-radius: 3px;
+      padding: 2rem 2.5rem;
+      margin: 2rem 0;
+    }
+
+    .fun-facts h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--green);
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .fun-facts ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .fun-facts li {
+      font-size: 0.88rem;
+      color: var(--charcoal-soft);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .fun-facts li::before {
+      content: '→';
+      color: var(--terracotta);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 0.1rem;
+    }
+
+    /* Contact strip */
+    .contact-strip {
+      border-top: 1px solid rgba(45,74,53,0.12);
+      padding-top: 3rem;
+      margin-top: 2rem;
+    }
+
+    .contact-strip h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-strip h3 em { font-style: italic; color: var(--terracotta); }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-items a {
+      font-size: 0.9rem;
+      color: var(--charcoal-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .contact-items a:hover { color: var(--green); }
+
+    .contact-items a svg { width: 14px; height: 14px; opacity: 0.5; }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+
+    .btn-secondary {
+      border: 1.5px solid var(--terracotta);
+      color: var(--terracotta);
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { background: var(--terracotta); color: var(--white); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+      font-weight: 300;
+    }
+
+    .footer-logo em { font-style: italic; color: var(--terracotta-light); }
+
+    .footer-contact a {
+      color: rgba(247,242,234,0.5);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .footer-contact a:hover { color: var(--cream); }
+
+    .footer-verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: rgba(247,242,234,0.3);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; gap: 2rem; }
+      .about-main { grid-template-columns: 1fr; }
+      .about-images { position: relative; height: 70vw; top: 0; grid-template-rows: 1fr; }
+      .about-text-col { padding: 3rem 2rem; }
+      .fun-facts ul { grid-template-columns: 1fr; }
+      footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Charlotte Carkuff <span>Art</span></a>
+    <ul class="nav-links">
+      <li><a href="gallery.html">Work</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="commission.html" class="nav-cta">Commission</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="page-header-left">
+      <p class="label">About Me</p>
+      <h1>The person<br>behind the<br><em>passion.</em></h1>
+    </div>
+    <div class="page-header-right">
+      <p>I believe we were all made in the image of a creative God and that art is one of the most beautiful ways we reflect that.</p>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="about-main">
+
+    <!-- sticky image column -->
+    <div class="about-images">
+      <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/09/c167d6aa-1cce-48c1-b4f3-51064b53d920.jpeg" alt="Charlotte Carkuff" />
+      <div class="about-images-bottom">
+      </div>
+    </div>
+
+    <!-- scrolling text column -->
+    <div class="about-text-col">
+
+      <div class="story-section">
+        <div class="section-num">01</div>
+        <h2>Where it all <em>began</em></h2>
+        <p>
+          My love for art began in childhood with simple sketches that grew into something much more meaningful. I became known for my handmade birthday and holiday cards, which I called "Charmark" cards. They weren't just cards; they were an early signal that creating for others was something I was made to do.
+        </p>
+        <p>
+          I was such a perfectionist as a kid that my teachers once took away my eraser privileges because I'd spend entire class periods reworking the same drawing. Painting changed that. With acrylics, and later oils, I learned to work <em>with</em> mistakes rather than against them.
+        </p>
+      </div>
+
+      <div class="story-section">
+        <div class="section-num">02</div>
+        <h2>Finding my <em>medium</em></h2>
+        <p>
+          In high school, I discovered acrylics and fell in love — then oils gave me an even deeper freedom to experiment. Junior year I took AP Art, started doing commissions for close friends and family, and realized that sharing art with people I love is one of the greatest privileges I know.
+        </p>
+        <p>
+          Since then I've been blessed to reach more and more people, which is what led me to creating this website. Every piece I make carries the prayer that it brings genuine joy to whoever receives it.
+        </p>
+      </div>
+
+      <div class="story-section">
+        <div class="section-num">03</div>
+        <h2>Faith at the <em>center</em></h2>
+        <p>
+          My faith is at the heart of everything I create. I write Bible verses on the backs of my paintings. I thank God before I pick up a brush. I was saved two years ago and encountered the perfect love of Jesus — and that changed how I see my gifts entirely.
+        </p>
+
+        <div class="scripture-block">
+          <p>"Each of you should use whatever gift you have received to serve others, as faithful stewards of God's grace in its various forms."</p>
+          <cite>1 Peter 4:10</cite>
+        </div>
+
+        <p>
+          I believe that we are all made in His image — and that we were created to create. Every human has a gift unique to them. I think that’s so beautiful! What’s your gift? Now, how can you use that for good?
+        </p>
+      </div>
+
+      <div class="story-section">
+        <div class="section-num">04</div>
+        <h2>Life beyond <em>the studio</em></h2>
+        <p>
+          I'm currently a student at Berry College in Rome, GA, double majoring in Communication and Sport Leadership & Strategy. I manage the women's basketball team, ref and play intramural sports, and serve as a Lettie Pate Whitehead Foundation scholar.
+        </p>
+        <p>
+          Art and athletics might sound like opposites, but to me they're both about discipline, creativity under pressure, and showing up for others.
+        </p>
+
+        <div class="fun-facts">
+          <h3>A few things about me</h3>
+          <ul>
+            <li>I have a very diverse taste in music</li>
+            <li>I played 4 sports in high school</li>
+            <li>My favorite movie is The Lion King</li>
+            <li>My favorite color is green</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- contact -->
+      <div class="contact-strip">
+        <h3>Let's make something <em>together.</em></h3>
+        <div class="contact-items">
+          <a href="mailto:crcarkuff@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            crcarkuff@gmail.com
+          </a>
+          <a href="tel:9312241954">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1.27h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.06a16 16 0 006.85 6.85l1.16-1.16a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            (931) 224-1954
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Rome, GA + Shelbyville, TN
+          </a>
+        </div>
+        <div class="cta-row">
+          <a href="commission.html" class="btn-primary">Start a Commission</a>
+          <a href="gallery.html" class="btn-secondary">View My Work</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Charlotte Carkuff <em>Art</em></div>
+    <div class="footer-contact">
+      <a href="mailto:crcarkuff@gmail.com">crcarkuff@gmail.com</a>
+      <a href="tel:9312241954">(931) 224-1954</a>
+    </div>
+    <p class="footer-verse">"We were created to create." — 1 Peter 4:10</p>
+  </footer>
+
+</body>
+</html>
