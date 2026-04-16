@@ -197,7 +197,8 @@
 
     .ai-notice-inner strong {
       font-weight: 500;
-      color: var(--charcoal);
+      colorgit add .
+      : var(--charcoal);
     }
 
     /* ── RIGHT: CHAT ── */
@@ -707,8 +708,8 @@ Keep responses short — 2-4 sentences max. One question per message.`;
     // ── API KEY SAVE ──
     document.getElementById('save-key-btn').addEventListener('click', () => {
       const key = document.getElementById('api-key-input').value.trim();
-      if (!key.startsWith('sk-ant-')) {
-        alert('That doesn\'t look like a valid Anthropic API key. It should start with sk-ant-');
+      if (!key.startsWith('gsk_')) {
+        alert('That doesn\'t look like a valid Groq API key. It should start with gsk_');
         return;
       }
       apiKey = key;
