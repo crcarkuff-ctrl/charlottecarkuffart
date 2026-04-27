@@ -620,165 +620,6 @@
 
     .social-link svg { width: 14px; height: 14px; }
 
-    /* ── WIP SECTION ── */
-    .wip-section {
-      background: linear-gradient(135deg, rgba(61,99,71,0.08) 0%, rgba(196,113,74,0.06) 100%);
-      padding: 6rem 5rem;
-      border: 1px solid rgba(45,74,53,0.12);
-      border-left: 3px solid var(--gold);
-    }
-
-    .wip-header {
-      margin-bottom: 3rem;
-    }
-
-    .wip-header .section-label {
-      color: var(--gold);
-      margin-bottom: 0.8rem;
-    }
-
-    .wip-header .section-title { margin-bottom: 1rem; }
-
-    .wip-subtitle {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--charcoal-soft);
-      max-width: 600px;
-    }
-
-    .wip-gallery {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .wip-carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: 4px;
-      background: var(--cream-dark);
-      aspect-ratio: 3/4;
-      border: 1px solid rgba(45,74,53,0.15);
-      margin-bottom: 2rem;
-    }
-
-    .wip-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .wip-slide.active {
-      opacity: 1;
-    }
-
-    .wip-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.8);
-    }
-
-    .wip-slide-badge {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--gold);
-      color: var(--charcoal);
-      padding: 0.4rem 0.9rem;
-      border-radius: 20px;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 500;
-      z-index: 2;
-    }
-
-    .wip-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.4);
-      color: var(--white);
-      border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
-      z-index: 3;
-    }
-
-    .wip-nav:hover {
-      background: rgba(184,154,90,0.6);
-    }
-
-    .wip-nav-prev { left: 1rem; }
-    .wip-nav-next { right: 1rem; }
-
-    .wip-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    .wip-dots {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .wip-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(45,74,53,0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(45,74,53,0.2);
-    }
-
-    .wip-dot.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      width: 24px;
-      border-radius: 4px;
-    }
-
-    .wip-counter {
-      font-size: 0.85rem;
-      color: var(--charcoal-soft);
-      letter-spacing: 0.05em;
-      font-weight: 500;
-      min-width: 60px;
-      text-align: center;
-    }
-
-    .wip-info {
-      text-align: center;
-    }
-
-    .wip-info h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--charcoal);
-      margin-bottom: 0.3rem;
-    }
-
-    .wip-info p {
-      font-size: 0.85rem;
-      color: var(--charcoal-soft);
-      letter-spacing: 0.05em;
-    }
-
     /* ── FOOTER ── */
     footer {
       background: var(--charcoal);
@@ -846,8 +687,6 @@
       .ai-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
       .about-strip { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
       .social-section { flex-direction: column; align-items: flex-start; padding: 3rem 2rem; }
-      .wip-section { padding: 4rem 2rem; }
-      .wip-controls { flex-wrap: wrap; gap: 1rem; }
       footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -882,7 +721,7 @@
     <div class="hero-right">
       <div class="hero-image-grid">
         <!-- Replace src values with your actual painting images -->
-        <img src="Screenshot 2026-04-27 at 12.44.51 PM.png" alt="Painting" class="span-col" />
+        <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3219-2-1.jpg?w=4000&h=" alt="Painting" class="span-col" />
       </div>
       <div class="hero-overlay-text">
       </div>
@@ -929,42 +768,6 @@
         <div class="work-card-label">
           <h3>Clothing &amp; Shoes</h3>
           <a href="gallery.html">See more →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORKS IN PROGRESS SECTION -->
-  <section class="wip-section">
-    <div class="container">
-      <div class="wip-header">
-        <h2 class="section-title">Works in Progress</h2>
-        <p class="wip-subtitle">
-          I love sharing my creative process. Here are some pieces I'm currently working on!
-        </p>
-      </div>
-      <div class="wip-gallery">
-        <div class="wip-carousel">
-          <div class="wip-slide active">
-            <img src="Screenshot 2026-04-27 at 12.36.05 PM.png" alt="Work in Progress 1" />
-            <span class="wip-slide-badge">In Progress</span>
-          </div>
-          <div class="wip-slide">
-            <video src="Justin Bieber Painting Progress.mp4" alt="Work in Progress 2" controls></video>
-            <span class="wip-slide-badge">In Progress</span>
-          </div>
-          <button class="wip-nav wip-nav-prev" onclick="wipPrev()">‹</button>
-          <button class="wip-nav wip-nav-next" onclick="wipNext()">›</button>
-        </div>
-        
-        <div class="wip-controls">
-          <div class="wip-dots" id="wipDots"></div>
-          <div class="wip-counter"><span id="wipCounter">1</span> / 2</div>
-        </div>
-        
-        <div class="wip-info">
-          <h3 id="wipTitle">Untitled Study</h3>
-          <p id="wipMedium">Oil on canvas • Early stages</p>
         </div>
       </div>
     </div>
@@ -1064,62 +867,6 @@
   </footer>
 
   <script>
-    // WIP Carousel Data
-    const wipItems = [
-      { title: 'Untitled Study', medium: 'Oil on canvas • Early stages' },
-      { title: 'Experimental Form', medium: 'Mixed media • Nearly complete' },
-      { title: 'Color Exploration', medium: 'Acrylic • Active work' },
-      { title: 'Textile in Motion', medium: 'Fabric • Concept phase' }
-    ];
-
-    let wipCurrent = 0;
-
-    // Initialize WIP carousel
-    function initWipCarousel() {
-      const wipDotsContainer = document.getElementById('wipDots');
-      
-      // Create dots
-      wipItems.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.className = 'wip-dot' + (index === 0 ? ' active' : '');
-        dot.onclick = () => wipShowSlide(index);
-        wipDotsContainer.appendChild(dot);
-      });
-    }
-
-    function wipShowSlide(index) {
-      wipCurrent = index;
-      
-      // Update slides
-      const slides = document.querySelectorAll('.wip-slide');
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-      });
-      
-      // Update dots
-      const dots = document.querySelectorAll('.wip-dot');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
-      
-      // Update info
-      document.getElementById('wipTitle').textContent = wipItems[index].title;
-      document.getElementById('wipMedium').textContent = wipItems[index].medium;
-      document.getElementById('wipCounter').textContent = index + 1;
-    }
-
-    function wipNext() {
-      wipCurrent = (wipCurrent + 1) % wipItems.length;
-      wipShowSlide(wipCurrent);
-    }
-
-    function wipPrev() {
-      wipCurrent = (wipCurrent - 1 + wipItems.length) % wipItems.length;
-      wipShowSlide(wipCurrent);
-    }
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', initWipCarousel);
   </script>
 
 </body>
