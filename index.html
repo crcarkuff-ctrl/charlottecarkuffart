@@ -389,140 +389,25 @@
 
     .work-card-label a:hover { color: var(--cream); }
 
-    /* ── AI SECTION ── */
-    .ai-section {
-      background: var(--green);
-      padding: 6rem 5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
+   /* ── COMMISSION TEASER ── */
+.commission-section {
+  background: var(--green);
+  padding: 6rem 5rem;
+  text-align: center;
+}
 
-    .ai-section::before {
-      content: '';
-      position: absolute;
-      top: -30%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.03);
-      pointer-events: none;
-    }
+.commission-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-    .ai-section::after {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      left: 20%;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: rgba(196,113,74,0.1);
-      pointer-events: none;
-    }
+.commission-section .section-label { color: var(--terracotta-light); }
+.commission-section .section-title { color: var(--cream); margin-bottom: 1.5rem; }
+.commission-section .section-title em { color: var(--gold); }
+.commission-section p { color: rgba(247,242,234,0.75); font-size: 0.95rem; line-height: 1.85; }
+.commission-section .btn-primary { background: var(--terracotta); }
+.commission-section .btn-primary:hover { background: var(--terracotta-light); }
 
-    .ai-left .section-label { color: var(--terracotta-light); }
-
-    .ai-left .section-title { color: var(--cream); }
-    .ai-left .section-title em { color: var(--gold); }
-
-    .ai-left p {
-      color: rgba(247,242,234,0.75);
-      font-size: 0.95rem;
-      line-height: 1.85;
-      margin-bottom: 2rem;
-    }
-
-    .ai-left .btn-primary {
-      background: var(--terracotta);
-    }
-
-    .ai-left .btn-primary:hover { background: var(--terracotta-light); }
-
-    /* chat preview */
-    .chat-preview {
-      background: rgba(247,242,234,0.06);
-      border: 1px solid rgba(247,242,234,0.12);
-      border-radius: 8px;
-      padding: 1.5rem;
-      backdrop-filter: blur(4px);
-    }
-
-    .chat-header {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(247,242,234,0.1);
-    }
-
-    .chat-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green-muted);
-    }
-
-    .chat-dot.active { background: #6fcf97; }
-
-    .chat-header span {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(247,242,234,0.5);
-    }
-
-    .chat-bubble {
-      margin-bottom: 1rem;
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .chat-bubble.user { flex-direction: row-reverse; }
-
-    .bubble-avatar {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: rgba(247,242,234,0.15);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-      color: rgba(247,242,234,0.6);
-      font-family: 'Jost', sans-serif;
-      letter-spacing: 0.05em;
-    }
-
-    .bubble-text {
-      background: rgba(247,242,234,0.08);
-      border: 1px solid rgba(247,242,234,0.1);
-      border-radius: 6px;
-      padding: 0.7rem 1rem;
-      font-size: 0.82rem;
-      color: rgba(247,242,234,0.8);
-      line-height: 1.6;
-      max-width: 75%;
-    }
-
-    .chat-bubble.user .bubble-text {
-      background: rgba(196,113,74,0.2);
-      border-color: rgba(196,113,74,0.25);
-    }
-
-    .bubble-text strong {
-      display: block;
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.3rem;
-      font-weight: 500;
-    }
 
     /* ── ABOUT STRIP ── */
     .about-strip {
