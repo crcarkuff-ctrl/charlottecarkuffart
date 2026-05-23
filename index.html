@@ -11,10 +11,9 @@
       --cream-dark: #ede6d6;
       --green: #2d4a35;
       --green-light: #3d6347;
-      --green-muted: #7a9e83;
+      --green-muted: #7ab8b5;
       --terracotta: #00827F;
       --terracotta-light: #33a8a5;
-      --green-muted: #7ab8b5;
       --charcoal: #2a2620;
       --charcoal-soft: #4a4540;
       --gold: #b89a5a;
@@ -22,7 +21,6 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -33,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -57,18 +54,8 @@
       text-decoration: none;
     }
 
-    .nav-logo span {
-      font-weight: 300;
-      font-style: italic;
-      color: var(--terracotta);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
+    .nav-logo span { font-weight: 300; font-style: italic; color: var(--terracotta); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       text-decoration: none;
       font-size: 0.78rem;
@@ -77,9 +64,7 @@
       color: var(--charcoal-soft);
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--green); }
-
     .nav-cta {
       background: var(--green);
       color: var(--cream) !important;
@@ -87,10 +72,47 @@
       border-radius: 2px;
       transition: background 0.2s !important;
     }
-
     .nav-cta:hover { background: var(--green-light) !important; color: var(--cream) !important; }
 
-    /* ── HERO ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(247, 242, 234, 0.98);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(45,74,53,0.1);
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 1.2rem;
+      z-index: 99;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal-soft);
+    }
+    .nav-mobile-menu a:last-child { color: var(--green); font-weight: 500; }
+
     .hero {
       min-height: 100vh;
       display: grid;
@@ -129,10 +151,7 @@
       animation: fadeUp 0.8s ease 0.4s forwards;
     }
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--green);
-    }
+    .hero-title em { font-style: italic; color: var(--green); }
 
     .hero-tagline {
       font-family: 'Cormorant Garamond', serif;
@@ -177,10 +196,7 @@
       display: inline-block;
     }
 
-    .btn-primary:hover {
-      background: var(--green-light);
-      transform: translateY(-1px);
-    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
 
     .btn-secondary {
       border: 1.5px solid var(--terracotta);
@@ -196,13 +212,8 @@
       display: inline-block;
     }
 
-    .btn-secondary:hover {
-      background: var(--terracotta);
-      color: var(--white);
-      transform: translateY(-1px);
-    }
+    .btn-secondary:hover { background: var(--terracotta); color: var(--white); transform: translateY(-1px); }
 
-    /* decorative line */
     .hero-left::before {
       content: '';
       position: absolute;
@@ -213,7 +224,6 @@
       background: linear-gradient(to bottom, transparent, var(--green-muted), transparent);
     }
 
-    /* ── HERO RIGHT ── */
     .hero-right {
       position: relative;
       overflow: hidden;
@@ -224,8 +234,8 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: 
-        radial-gradient(ellipse at 30% 60%, rgba(196,113,74,0.25) 0%, transparent 60%),
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(0,130,127,0.25) 0%, transparent 60%),
         radial-gradient(ellipse at 80% 20%, rgba(247,242,234,0.08) 0%, transparent 50%);
       z-index: 1;
     }
@@ -250,39 +260,17 @@
     }
 
     .hero-image-grid img:hover { filter: saturate(1.1); }
-
-    .hero-image-grid .span-col {
-      grid-column: span 2;
-    }
+    .hero-image-grid .span-col { grid-column: span 2; }
 
     .hero-overlay-text {
       position: absolute;
       bottom: 2.5rem;
       right: 2.5rem;
       z-index: 2;
-      text-align: right;
       opacity: 0;
       animation: fadeUp 0.8s ease 1.2s forwards;
     }
 
-    .hero-overlay-text p {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: rgba(247,242,234,0.9);
-      line-height: 1.6;
-    }
-
-    .hero-overlay-text span {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(247,242,234,0.6);
-      font-family: 'Jost', sans-serif;
-      font-style: normal;
-    }
-
-    /* ── MARQUEE ── */
     .marquee-strip {
       background: var(--terracotta);
       padding: 0.75rem 0;
@@ -304,16 +292,9 @@
       letter-spacing: 0.05em;
     }
 
-    .marquee-inner span.dot {
-      font-style: normal;
-      color: rgba(255,255,255,0.5);
-      padding: 0 0.5rem;
-    }
+    .marquee-inner span.dot { font-style: normal; color: rgba(255,255,255,0.5); padding: 0 0.5rem; }
 
-    /* ── SECTION: WHAT I MAKE ── */
-    .section {
-      padding: 6rem 5rem;
-    }
+    .section { padding: 6rem 5rem; }
 
     .section-label {
       font-size: 0.72rem;
@@ -334,7 +315,6 @@
 
     .section-title em { font-style: italic; color: var(--green); }
 
-    /* work grid */
     .work-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -358,18 +338,13 @@
       filter: saturate(0.9);
     }
 
-    .work-card:hover img {
-      transform: scale(1.05);
-      filter: saturate(1.1);
-    }
+    .work-card:hover img { transform: scale(1.05); filter: saturate(1.1); }
 
     .work-card-label {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       background: linear-gradient(to top, rgba(42,38,32,0.85) 0%, transparent 100%);
       padding: 2rem 1.5rem 1.2rem;
-      transform: translateY(0);
-      transition: transform 0.3s ease;
     }
 
     .work-card-label h3 {
@@ -390,27 +365,20 @@
 
     .work-card-label a:hover { color: var(--cream); }
 
-   /* ── COMMISSION TEASER ── */
-.commission-section {
-  background: var(--green);
-  padding: 6rem 5rem;
-  text-align: center;
-}
+    .commission-section {
+      background: var(--green);
+      padding: 6rem 5rem;
+      text-align: center;
+    }
 
-.commission-content {
-  max-width: 600px;
-  margin: 0 auto;
-}
+    .commission-content { max-width: 600px; margin: 0 auto; }
+    .commission-section .section-label { color: var(--terracotta-light); }
+    .commission-section .section-title { color: var(--cream); margin-bottom: 1.5rem; }
+    .commission-section .section-title em { color: var(--gold); }
+    .commission-section p { color: rgba(247,242,234,0.75); font-size: 0.95rem; line-height: 1.85; }
+    .commission-section .btn-primary { background: var(--terracotta); }
+    .commission-section .btn-primary:hover { background: var(--terracotta-light); }
 
-.commission-section .section-label { color: var(--terracotta-light); }
-.commission-section .section-title { color: var(--cream); margin-bottom: 1.5rem; }
-.commission-section .section-title em { color: var(--gold); }
-.commission-section p { color: rgba(247,242,234,0.75); font-size: 0.95rem; line-height: 1.85; }
-.commission-section .btn-primary { background: var(--terracotta); }
-.commission-section .btn-primary:hover { background: var(--terracotta-light); }
-
-
-    /* ── ABOUT STRIP ── */
     .about-strip {
       padding: 6rem 5rem;
       display: grid;
@@ -420,13 +388,7 @@
     }
 
     .about-text .section-title { margin-bottom: 1.5rem; }
-
-    .about-text p {
-      font-size: 0.95rem;
-      line-height: 1.85;
-      color: var(--charcoal-soft);
-      margin-bottom: 1rem;
-    }
+    .about-text p { font-size: 0.95rem; line-height: 1.85; color: var(--charcoal-soft); margin-bottom: 1rem; }
 
     .about-text .scripture {
       font-family: 'Cormorant Garamond', serif;
@@ -439,16 +401,8 @@
       line-height: 1.6;
     }
 
-    .about-image {
-      position: relative;
-    }
-
-    .about-image img {
-      width: 100%;
-      border-radius: 3px;
-      display: block;
-    }
-
+    .about-image { position: relative; }
+    .about-image img { width: 100%; border-radius: 3px; display: block; }
     .about-image::before {
       content: '';
       position: absolute;
@@ -459,7 +413,6 @@
       z-index: -1;
     }
 
-    /* ── SOCIAL ── */
     .social-section {
       background: var(--cream-dark);
       padding: 4rem 5rem;
@@ -469,19 +422,9 @@
       gap: 2rem;
     }
 
-    .social-section h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: var(--charcoal);
-    }
-
+    .social-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--charcoal); }
     .social-section h2 em { font-style: italic; color: var(--green); }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
+    .social-links { display: flex; gap: 1rem; }
 
     .social-link {
       display: flex;
@@ -498,15 +441,9 @@
       transition: all 0.2s;
     }
 
-    .social-link:hover {
-      background: var(--charcoal);
-      color: var(--cream);
-      border-color: var(--charcoal);
-    }
-
+    .social-link:hover { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
     .social-link svg { width: 14px; height: 14px; }
 
-    /* ── FOOTER ── */
     footer {
       background: var(--charcoal);
       padding: 3rem 5rem;
@@ -517,69 +454,44 @@
       gap: 1.5rem;
     }
 
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--cream);
-      font-weight: 300;
-    }
-
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-weight: 300; }
     .footer-logo em { font-style: italic; color: var(--terracotta-light); }
-
-    .footer-contact a {
-      color: rgba(247,242,234,0.5);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
+    .footer-contact a { color: rgba(247,242,234,0.5); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.06em; transition: color 0.2s; display: block; margin-bottom: 0.2rem; }
     .footer-contact a:hover { color: var(--cream); }
+    .footer-verse { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: rgba(247,242,234,0.3); }
 
-    .footer-verse {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: rgba(247,242,234,0.3);
-    }
-
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
     @keyframes marquee {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 7rem 2rem 3rem; }
       .hero-right { height: 60vw; }
       .section { padding: 4rem 2rem; }
       .work-grid { grid-template-columns: 1fr 1fr; }
-      .ai-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
+      .commission-section { padding: 4rem 2rem; }
       .about-strip { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
       .social-section { flex-direction: column; align-items: flex-start; padding: 3rem 2rem; }
+      .social-links { flex-wrap: wrap; }
       footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">Charlotte Carkuff <span>Art</span></a>
     <ul class="nav-links">
@@ -588,9 +500,17 @@
       <li><a href="about.html">About</a></li>
       <li><a href="commission.html" class="nav-cta">Commission</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="gallery.html">Work</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="commission.html">Commission</a>
+    </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-left">
       <p class="hero-verse">1 Peter 4:10</p>
@@ -606,15 +526,12 @@
     </div>
     <div class="hero-right">
       <div class="hero-image-grid">
-        <!-- Replace src values with your actual painting images -->
         <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2026/05/sw-day3-22-1.jpg?w=4000&h=" alt="Painting" class="span-col" />
       </div>
-      <div class="hero-overlay-text">
-      </div>
+      <div class="hero-overlay-text"></div>
     </div>
   </section>
 
-  <!-- MARQUEE -->
   <div class="marquee-strip">
     <div class="marquee-inner">
       <span>Original Paintings</span><span class="dot">·</span>
@@ -630,10 +547,9 @@
     </div>
   </div>
 
-  <!-- WORK -->
   <section class="section">
     <p class="section-label">My Work</p>
-    <h2 class="section-title">Art made with<br><em>intention</em>
+    <h2 class="section-title">Art made with<br><em>intention</em></h2>
     <div class="work-grid">
       <div class="work-card">
         <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_3540-3-1.jpg" alt="Original Paintings" />
@@ -659,31 +575,25 @@
     </div>
   </section>
 
-<!-- COMMISSION TEASER -->
-<section class="commission-section">
-  <div class="commission-content">
-    <p class="section-label">Let's Collaborate</p>
-    <h2 class="section-title">Something made<br><em>just for you.</em></h2>
-    <p>Whether it's a portrait, a gift, or something you've been imagining for years, I'd love to bring it to life. Tell me about your vision and I'll get back to you with next steps and pricing.</p>
-    <br>
-    <a href="commission.html" class="btn-primary">Request a Commission</a>
-  </div>
-</section>
+  <section class="commission-section">
+    <div class="commission-content">
+      <p class="section-label">Let's Collaborate</p>
+      <h2 class="section-title">Something made<br><em>just for you.</em></h2>
+      <p>Whether it's a portrait, a gift, or something you've been imagining for years, I'd love to bring it to life. Tell me about your vision and I'll get back to you with next steps and pricing.</p>
+      <br>
+      <a href="commission.html" class="btn-primary">Request a Commission</a>
+    </div>
+  </section>
 
-  <!-- ABOUT -->
   <section class="about-strip">
     <div class="about-text">
       <p class="section-label">About Charlotte</p>
       <h2 class="section-title">Art as a <em>gift</em> —<br>given and shared</h2>
-      <p>
-        My art journey started with pencil sketches and homemade cards then grew into oils, acrylics, and a love for painting portraits that bring real joy to people.
-      </p>
+      <p>My art journey started with pencil sketches and homemade cards then grew into oils, acrylics, and a love for painting portraits that bring real joy to people.</p>
       <blockquote class="scripture">
         "Each of you should use whatever gift you have received to serve others." — 1 Peter 4:10
       </blockquote>
-      <p>
-        My faith is at the heart of everything I create. I believe we are all made in the image of a creative God, and that art is one of the most beautiful ways we get to reflect that.
-      </p>
+      <p>My faith is at the heart of everything I create. I believe we are all made in the image of a creative God, and that art is one of the most beautiful ways we get to reflect that.</p>
       <br>
       <a href="about.html" class="btn-secondary">Read My Full Story</a>
     </div>
@@ -692,7 +602,6 @@
     </div>
   </section>
 
-  <!-- SOCIAL -->
   <div class="social-section">
     <h2>Follow along on<br><em>social media</em></h2>
     <div class="social-links">
@@ -711,7 +620,6 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Charlotte Carkuff <em>Art</em></div>
     <div class="footer-contact">
@@ -722,6 +630,11 @@
   </footer>
 
   <script>
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
   </script>
 
 </body>
