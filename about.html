@@ -11,10 +11,9 @@
       --cream-dark: #ede6d6;
       --green: #2d4a35;
       --green-light: #3d6347;
-      --green-muted: #7a9e83;
+      --green-muted: #7ab8b5;
       --terracotta: #00827F;
       --terracotta-light: #33a8a5;
-      --green-muted: #7ab8b5;
       --charcoal: #2a2620;
       --charcoal-soft: #4a4540;
       --gold: #b89a5a;
@@ -32,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -46,36 +44,47 @@
       border-bottom: 1px solid rgba(45, 74, 53, 0.1);
     }
 
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--green);
-      text-decoration: none;
-    }
-
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.04em; color: var(--green); text-decoration: none; }
     .nav-logo span { font-weight: 300; font-style: italic; color: var(--terracotta); }
-
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--charcoal-soft);
-      transition: color 0.2s;
-    }
+    .nav-links a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal-soft); transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--green); }
-    .nav-cta {
-      background: var(--green);
-      color: var(--cream) !important;
-      padding: 0.5rem 1.2rem;
-      border-radius: 2px;
-    }
+    .nav-cta { background: var(--green); color: var(--cream) !important; padding: 0.5rem 1.2rem; border-radius: 2px; }
     .nav-cta:hover { background: var(--green-light) !important; }
 
-    /* ── PAGE HEADER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--green);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(247, 242, 234, 0.98);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(45,74,53,0.1);
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 1.2rem;
+      z-index: 99;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a { text-decoration: none; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal-soft); }
+    .nav-mobile-menu a:last-child { color: var(--green); font-weight: 500; }
+
     .page-header {
       padding: 9rem 5rem 4rem;
       display: grid;
@@ -105,10 +114,7 @@
       animation: fadeUp 0.7s ease 0.25s forwards;
     }
 
-    .page-header-left h1 em {
-      font-style: italic;
-      color: var(--green);
-    }
+    .page-header-left h1 em { font-style: italic; color: var(--green); }
 
     .page-header-right {
       opacity: 0;
@@ -125,14 +131,12 @@
       padding-left: 1.5rem;
     }
 
-    /* ── MAIN CONTENT ── */
     .about-main {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
     }
 
-    /* Left column: images */
     .about-images {
       position: sticky;
       top: 5rem;
@@ -144,26 +148,12 @@
       background: var(--green);
     }
 
-    .about-images img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: saturate(0.85);
-      transition: filter 0.5s;
-    }
-
+    .about-images img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); transition: filter 0.5s; }
     .about-images img:hover { filter: saturate(1.1); }
 
-    .about-images-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-    }
+    .about-images-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
 
-    /* Right column: text */
-    .about-text-col {
-      padding: 5rem;
-    }
+    .about-text-col { padding: 5rem; }
 
     .story-section {
       margin-bottom: 4rem;
@@ -196,12 +186,7 @@
 
     .story-section h2 em { font-style: italic; color: var(--green); }
 
-    .story-section p {
-      font-size: 0.95rem;
-      line-height: 1.9;
-      color: var(--charcoal-soft);
-      margin-bottom: 1rem;
-    }
+    .story-section p { font-size: 0.95rem; line-height: 1.9; color: var(--charcoal-soft); margin-bottom: 1rem; }
 
     .scripture-block {
       background: var(--green);
@@ -246,7 +231,6 @@
       z-index: 1;
     }
 
-    /* Fun facts */
     .fun-facts {
       background: var(--cream-dark);
       border-radius: 3px;
@@ -254,116 +238,48 @@
       margin: 2rem 0;
     }
 
-    .fun-facts h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--green);
-      margin-bottom: 1.2rem;
-      font-style: italic;
-    }
+    .fun-facts h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--green); margin-bottom: 1.2rem; font-style: italic; }
 
-    .fun-facts ul {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
+    .fun-facts ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 
-    .fun-facts li {
-      font-size: 0.88rem;
-      color: var(--charcoal-soft);
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      line-height: 1.5;
-    }
+    .fun-facts li { font-size: 0.88rem; color: var(--charcoal-soft); display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.5; }
 
-    .fun-facts li::before {
-      content: '→';
-      color: var(--terracotta);
-      flex-shrink: 0;
-      font-size: 0.75rem;
-      margin-top: 0.1rem;
-    }
+    .fun-facts li::before { content: '→'; color: var(--terracotta); flex-shrink: 0; font-size: 0.75rem; margin-top: 0.1rem; }
 
-    /* Contact strip */
     .contact-strip {
       border-top: 1px solid rgba(45,74,53,0.12);
       padding-top: 3rem;
       margin-top: 2rem;
     }
 
-    .contact-strip h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 300;
-      color: var(--charcoal);
-      margin-bottom: 1.5rem;
-    }
-
+    .contact-strip h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--charcoal); margin-bottom: 1.5rem; }
     .contact-strip h3 em { font-style: italic; color: var(--terracotta); }
 
-    .contact-items {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-bottom: 2rem;
-    }
+    .contact-items { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
 
-    .contact-items a {
-      font-size: 0.9rem;
-      color: var(--charcoal-soft);
-      text-decoration: none;
-      transition: color 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
+    .contact-items a { font-size: 0.9rem; color: var(--charcoal-soft); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.6rem; }
     .contact-items a:hover { color: var(--green); }
-
     .contact-items a svg { width: 14px; height: 14px; opacity: 0.5; }
 
-    .cta-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+    .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
 
     .btn-primary {
-      background: var(--green);
-      color: var(--cream);
-      text-decoration: none;
-      padding: 0.85rem 2rem;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      transition: background 0.2s, transform 0.2s;
-      display: inline-block;
+      background: var(--green); color: var(--cream); text-decoration: none;
+      padding: 0.85rem 2rem; font-family: 'Jost', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      border-radius: 2px; transition: background 0.2s, transform 0.2s; display: inline-block;
     }
-
     .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
 
     .btn-secondary {
-      border: 1.5px solid var(--terracotta);
-      color: var(--terracotta);
-      text-decoration: none;
-      padding: 0.85rem 2rem;
-      font-family: 'Jost', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      transition: all 0.2s;
-      display: inline-block;
+      border: 1.5px solid var(--terracotta); color: var(--terracotta); text-decoration: none;
+      padding: 0.85rem 2rem; font-family: 'Jost', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      border-radius: 2px; transition: all 0.2s; display: inline-block;
     }
-
     .btn-secondary:hover { background: var(--terracotta); color: var(--white); transform: translateY(-1px); }
 
-     .social-section {
+    .social-section {
       background: var(--cream-dark);
       padding: 4rem 5rem;
       display: flex;
@@ -377,24 +293,14 @@
     .social-links { display: flex; gap: 1rem; }
 
     .social-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      color: var(--charcoal-soft);
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.6rem 1.2rem;
-      border: 1px solid rgba(42,38,32,0.2);
-      border-radius: 2px;
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
+      color: var(--charcoal-soft); font-size: 0.78rem; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.6rem 1.2rem;
+      border: 1px solid rgba(42,38,32,0.2); border-radius: 2px; transition: all 0.2s;
     }
-
     .social-link:hover { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
     .social-link svg { width: 14px; height: 14px; }
 
-    /* ── FOOTER ── */
     footer {
       background: var(--charcoal);
       padding: 3rem 5rem;
@@ -405,56 +311,34 @@
       gap: 1.5rem;
     }
 
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--cream);
-      font-weight: 300;
-    }
-
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-weight: 300; }
     .footer-logo em { font-style: italic; color: var(--terracotta-light); }
-
-    .footer-contact a {
-      color: rgba(247,242,234,0.5);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
+    .footer-contact a { color: rgba(247,242,234,0.5); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.06em; transition: color 0.2s; display: block; margin-bottom: 0.2rem; }
     .footer-contact a:hover { color: var(--cream); }
+    .footer-verse { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: rgba(247,242,234,0.3); }
 
-    .footer-verse {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: rgba(247,242,234,0.3);
-    }
-
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
       .page-header { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; gap: 2rem; }
       .about-main { grid-template-columns: 1fr; }
       .about-images { position: relative; height: 70vw; top: 0; grid-template-rows: 1fr; }
       .about-text-col { padding: 3rem 2rem; }
       .fun-facts ul { grid-template-columns: 1fr; }
+      .social-section { flex-direction: column; align-items: flex-start; padding: 3rem 2rem; }
+      .social-links { flex-wrap: wrap; }
       footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">Charlotte Carkuff <span>Art</span></a>
     <ul class="nav-links">
@@ -463,9 +347,17 @@
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="commission.html" class="nav-cta">Commission</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="gallery.html">Work</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="commission.html">Commission</a>
+    </div>
   </nav>
 
-  <!-- PAGE HEADER -->
   <header class="page-header">
     <div class="page-header-left">
       <p class="label">About Me</p>
@@ -476,68 +368,44 @@
     </div>
   </header>
 
-  <!-- MAIN -->
   <div class="about-main">
-
-    <!-- sticky image column -->
     <div class="about-images">
       <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/09/c167d6aa-1cce-48c1-b4f3-51064b53d920.jpeg" alt="Charlotte Carkuff" />
-      <div class="about-images-bottom">
-      </div>
+      <div class="about-images-bottom"></div>
     </div>
 
-    <!-- scrolling text column -->
     <div class="about-text-col">
 
       <div class="story-section">
         <div class="section-num">01</div>
         <h2>Where it all <em>began</em></h2>
-        <p>
-          My love for art began in childhood with simple sketches that grew into something much more meaningful. I became known for my handmade birthday and holiday cards, which I called "Charmark" cards. They weren't just cards; they were an early signal that creating for others was something I was made to do.
-        </p>
-        <p>
-          I was such a perfectionist as a kid that my teachers once took away my eraser privileges because I'd spend entire class periods reworking the same drawing. Painting changed that. With acrylics, and later oils, I learned to work <em>with</em> mistakes rather than against them.
-        </p>
+        <p>My love for art began in childhood with simple sketches that grew into something much more meaningful. I became known for my handmade birthday and holiday cards, which I called "Charmark" cards. They weren't just cards; they were an early signal that creating for others was something I was made to do.</p>
+        <p>I was such a perfectionist as a kid that my teachers once took away my eraser privileges because I'd spend entire class periods reworking the same drawing. Painting changed that. With acrylics, and later oils, I learned to work <em>with</em> mistakes rather than against them.</p>
       </div>
 
       <div class="story-section">
         <div class="section-num">02</div>
         <h2>Finding my <em>medium</em></h2>
-        <p>
-          In high school, I discovered acrylics and oils. I fell in love with oil paints because they gave me freedom to experiment and embrace imperfection. Junior year I took AP Art, started doing commissions for close friends and family, and realized that sharing art with people I love is one of the greatest privileges I know.
-        </p>
-        <p>
-          Since then I've been blessed to reach more and more people, which is what led me to creating this website. Every piece I make carries the prayer that it brings genuine joy to whoever receives it.
-        </p>
+        <p>In high school, I discovered acrylics and oils. I fell in love with oil paints because they gave me freedom to experiment and embrace imperfection. Junior year I took AP Art, started doing commissions for close friends and family, and realized that sharing art with people I love is one of the greatest privileges I know.</p>
+        <p>Since then I've been blessed to reach more and more people, which is what led me to creating this website. Every piece I make carries the prayer that it brings genuine joy to whoever receives it.</p>
       </div>
 
       <div class="story-section">
         <div class="section-num">03</div>
         <h2>Faith at the <em>center</em></h2>
-        <p>
-          My faith is at the heart of everything I create. I write Bible verses on the backs of my paintings. I thank God before I pick up a brush. I was saved two years ago and encountered the perfect love of Jesus and that changed how I see my gifts entirely.
-        </p>
-
+        <p>My faith is at the heart of everything I create. I write Bible verses on the backs of my paintings. I thank God before I pick up a brush. I was saved two years ago and encountered the perfect love of Jesus and that changed how I see my gifts entirely.</p>
         <div class="scripture-block">
           <p>"Each of you should use whatever gift you have received to serve others, as faithful stewards of God's grace in its various forms."</p>
           <cite>1 Peter 4:10</cite>
         </div>
-
-        <p>
-          I believe that we are all made in His image and that we were created to create. Every human has a gift unique to them. I think that’s so beautiful! What’s your gift? Now, how can you use that for good?
-        </p>
+        <p>I believe that we are all made in His image and that we were created to create. Every human has a gift unique to them. I think that's so beautiful! What's your gift? Now, how can you use that for good?</p>
       </div>
 
       <div class="story-section">
         <div class="section-num">04</div>
         <h2>Life beyond <em>the studio</em></h2>
-        <p>
-          I'm currently a student at Berry College, double-majoring in Communication and Sport Leadership & Strategy. I manage the women's basketball team, am the Director of Intramurals, and serve as a Lettie Pate Whitehead Foundation scholar.
-        </p>
-        <p>
-          Art and athletics might sound like opposites, but to me they're both about discipline, creativity under pressure, and showing up for others.
-        </p>
-
+        <p>I'm currently a student at Berry College, double-majoring in Communication and Sport Leadership & Strategy. I manage the women's basketball team, am the Director of Intramurals, and serve as a Lettie Pate Whitehead Foundation scholar.</p>
+        <p>Art and athletics might sound like opposites, but to me they're both about discipline, creativity under pressure, and showing up for others.</p>
         <div class="fun-facts">
           <h3>Fun Facts</h3>
           <ul>
@@ -549,7 +417,6 @@
         </div>
       </div>
 
-      <!-- contact -->
       <div class="contact-strip">
         <h3>Let's make something <em>together.</em></h3>
         <div class="contact-items">
@@ -561,7 +428,6 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1.27h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.06a16 16 0 006.85 6.85l1.16-1.16a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             (931) 224-1954
           </a>
-          </a>
         </div>
         <div class="cta-row">
           <a href="commission.html" class="btn-primary">Start a Commission</a>
@@ -569,7 +435,11 @@
         </div>
       </div>
 
-      <div class="social-section">
+    </div>
+  </div>
+
+  <!-- SOCIAL — full width, outside about-main -->
+  <div class="social-section">
     <h2>Follow along on<br><em>social media</em></h2>
     <div class="social-links">
       <a href="https://www.instagram.com/char_paintz/" target="_blank" class="social-link">
@@ -587,7 +457,7 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER — full width -->
   <footer>
     <div class="footer-logo">Charlotte Carkuff <em>Art</em></div>
     <div class="footer-contact">
@@ -596,6 +466,14 @@
     </div>
     <p class="footer-verse">"Just as each one has received a gift, use it to serve others, as good stewards of the varied grace of God." — 1 Peter 4:10 (CSB)</p>
   </footer>
+
+  <script>
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+  </script>
 
 </body>
 </html>
