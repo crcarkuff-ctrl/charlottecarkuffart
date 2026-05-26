@@ -319,18 +319,113 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      .page-header { flex-direction: column; align-items: flex-start; padding: 6rem 2rem 2rem; }
-      .gallery-wrap { padding: 2rem; }
-      .masonry { columns: 2; }
-      .lightbox-inner { flex-direction: column; max-width: 95vw; }
-      .lightbox-inner img { max-width: 90vw; }
-      footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
-    }
 
-    @media (max-width: 500px) {
-      .masonry { columns: 1; }
+  nav {
+    padding: 1.2rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* KEEP MENU VISIBLE ON MOBILE */
+  .nav-links {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6.5rem 1.5rem 2rem;
+  }
+
+  .gallery-wrap {
+    padding: 1.2rem;
+  }
+
+  /* KEEP TILE GALLERY ON PHONES */
+  .masonry {
+    columns: 2;
+    column-gap: 0.8rem;
+  }
+
+  .gallery-item {
+    margin-bottom: 0.8rem;
+  }
+
+  .lightbox-inner {
+    flex-direction: column;
+    max-width: 95vw;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .lightbox-inner img {
+    max-width: 90vw;
+    max-height: 55vh;
+  }
+
+  .lightbox-info {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  /* FIX SOCIAL SECTION */
+  .social-section {
+    padding: 3rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .social-links {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  footer {
+    padding: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-verse {
+    line-height: 1.6;
+  }
+}
+
+/* SMALL PHONES */
+@media (max-width: 500px) {
+
+  /* THIS FIXES THE ONE-LONG-COLUMN ISSUE */
+  .masonry {
+    columns: 2;
+  }
+
+  .filter-tabs {
+    width: 100%;
+  }
+
+  .filter-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .page-header-left h1 {
+    font-size: 2.4rem;
+  }
+}
     }
   </style>
 </head>
