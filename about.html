@@ -301,6 +301,82 @@
     .social-link:hover { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
     .social-link svg { width: 14px; height: 14px; }
 
+    /* ── Newsletter ── */
+    .newsletter-section {
+      background: var(--cream-dark);
+      padding: 4rem 5rem;
+      text-align: center;
+      border-top: 1px solid rgba(45,74,53,0.1);
+    }
+
+    .newsletter-section .section-label { margin-bottom: 0.6rem; }
+
+    .newsletter-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 0.6rem;
+    }
+
+    .newsletter-section h2 em { font-style: italic; color: var(--green); }
+
+    .newsletter-section p {
+      font-size: 0.88rem;
+      color: var(--charcoal-soft);
+      margin-bottom: 1.8rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input[type="email"] {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.75rem 1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      border: 1.5px solid rgba(45,74,53,0.25);
+      border-radius: 2px;
+      background: var(--white);
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-form input[type="email"]:focus { border-color: var(--green); }
+
+    .newsletter-form button {
+      background: var(--green);
+      color: var(--cream);
+      border: none;
+      padding: 0.75rem 1.8rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .newsletter-form button:hover { background: var(--green-light); transform: translateY(-1px); }
+
+    .newsletter-success {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--green);
+      margin-top: 1rem;
+    }
+    
     footer {
       background: var(--charcoal);
       padding: 3rem 5rem;
