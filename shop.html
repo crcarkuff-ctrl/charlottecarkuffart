@@ -123,6 +123,7 @@
 
     .product-badge.sold { background: var(--charcoal-soft); }
     .product-badge.print { background: var(--green); }
+    .product-badge.new { background: var(--gold); color: var(--charcoal); font-weight: 500; }
 
     .product-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.2rem; }
     .product-info .meta { font-size: 0.75rem; color: var(--charcoal-soft); letter-spacing: 0.05em; margin-bottom: 0.6rem; }
@@ -341,7 +342,33 @@
     }
 
     @media (max-width: 500px) {
-      .product-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .social-section {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2.5rem;
+        gap: 1.5rem;
+      }
+
+      .social-section h2 {
+        font-size: 1.4rem;
+      }
+
+      .social-links {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .social-link {
+        flex: 1;
+        min-width: 140px;
+        justify-content: center;
+        font-size: 0.7rem;
+        padding: 0.5rem 0.8rem;
+      }
     }
   </style>
 </head>
@@ -394,7 +421,22 @@
           <p class="meta">Gouache on canvas · 11×14 in</p>
           <div class="product-footer">
             <div class="product-price">$130</div>
-            <a href="https://buy.stripe.com/fZudRa5EH7Mq4ckbzXcEw0J" class="product-btn buy">Buy</a>
+            <button class="product-btn buy" onclick="openModal('From the Heart', '$130', 'https://buy.stripe.com/fZudRa5EH7Mq4ckbzXcEw0J')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('Matthew 14:31.jpg', 'Matthew 14:31', 'Oil on canvas · 11×14 in', '$150')">
+          <img src="Matthew 14:31.jpg" alt="Original Painting" />
+          <span class="product-badge new">Newest</span>
+        </div>
+        <div class="product-info">
+          <h3>Matthew 14:31</h3>
+          <p class="meta">Oil on canvas · 11×14 in</p>
+          <div class="product-footer">
+            <div class="product-price">$150</div>
+            <button class="product-btn buy" onclick="openModal('Matthew 14:31', '$150', 'https://buy.stripe.com/28E5kE2sv9UyaAI47vcEw0Q')">Buy</button>
           </div>
         </div>
       </div>
@@ -409,7 +451,7 @@
           <p class="meta">Oil on canvas · 11×14 in</p>
           <div class="product-footer">
             <div class="product-price">$150</div>
-            <a href="https://buy.stripe.com/3cIcN67MPeaOfV26fDcEw0P" class="product-btn buy">Buy</a>
+            <button class="product-btn buy" onclick="openModal('Tyler Durden', '$150', 'https://buy.stripe.com/3cIcN67MPeaOfV26fDcEw0P')">Buy</button>
           </div>
         </div>
       </div>
@@ -424,7 +466,7 @@
           <p class="meta">Oil on canvas · 16×20 in</p>
           <div class="product-footer">
             <div class="product-price">$240</div>
-            <a href="https://buy.stripe.com/bJe8wQ0knfeS24cavTcEw0O" class="product-btn buy">Buy</a>
+            <button class="product-btn buy" onclick="openModal('Big Reputation', '$240', 'https://buy.stripe.com/bJe8wQ0knfeS24cavTcEw0O')">Buy</button>
           </div>
         </div>
       </div>
@@ -439,7 +481,7 @@
           <p class="meta">Oil on canvas · 24×36 in</p>
           <div class="product-footer">
             <div class="product-price">$432</div>
-             <a href="https://buy.stripe.com/4gM00k9UXc2GgZ61ZncEw0N" class="product-btn buy">Buy</a>
+            <button class="product-btn buy" onclick="openModal('JT \'Drown\' Performance', '$432', 'https://buy.stripe.com/4gM00k9UXc2GgZ61ZncEw0N')">Buy</button>
           </div>
         </div>
       </div>
@@ -484,8 +526,21 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_2480.jpg', 'Beths Flowers Print', 'Giclee print · 8×10 in · Multiple sizes available', '$25+')">
+      <div class="product-card">        <div class="product-img" onclick="openProductLightbox('Matthew 14:31.jpg', 'Matthew 14:31 Print', 'Giclee print · 8×10 in · Multiple sizes available', '$20+')">
+          <img src="Matthew 14:31.jpg" alt="Art Print" />
+          <span class="product-badge new">Newest</span>
+        </div>
+        <div class="product-info">
+          <h3>Matthew 14:31 Print</h3>
+          <p class="meta">Giclee print · Multiple sizes available</p>
+          <div class="product-footer">
+            <div class="product-price">$20+</div>
+            <button class="product-btn buy" onclick="openModal('Matthew 14:31 Print', '$20+')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_2480.jpg', 'Beths Flowers Print', 'Giclee print · 8×10 in · Multiple sizes available', '$25+')">
           <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_2480.jpg" alt="Art Print" />
           <span class="product-badge print">Print</span>
         </div>
@@ -598,8 +653,9 @@
       <button class="modal-close" onclick="closeModal()">✕</button>
       <h3>Purchase <em id="modal-title"></em></h3>
       <p id="modal-body"></p>
-      <div class="modal-btns">
-        <a href="mailto:crcarkuff@gmail.com" class="modal-btn-primary" id="modal-email-btn">Email Charlotte</a>
+      <div class="modal-btns" id="modal-buttons">
+        <a href="#" class="modal-btn-primary" id="modal-stripe-btn">Pay with Stripe</a>
+        <a href="https://account.venmo.com/u/charlottecarkuff" target="_blank" class="modal-btn-secondary">Pay with Venmo</a>
       </div>
     </div>
   </div>
@@ -627,10 +683,20 @@
     cards.forEach(c => obs.observe(c));
 
     // Modal
-    function openModal(title, price) {
+    function openModal(title, price, stripeUrl = null) {
       document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-body').textContent = `To purchase "${title}" (${price}), email Charlotte directly. She accepts payment via Stripe, Paypal, or Venmo and will confirm availability and arrange shipping with you. Note that the price may vary depending on the print medium.`;
-      document.getElementById('modal-email-btn').href = `mailto:crcarkuff@gmail.com?subject=Purchase Inquiry: ${encodeURIComponent(title)}&body=Hi Charlotte! I'm interested in purchasing "${title}" (${price}). Could you confirm availability and share payment details?`;
+      
+      if (stripeUrl) {
+        // For originals: show Stripe + Venmo options
+        document.getElementById('modal-body').textContent = `"${title}" (${price}) - Choose your preferred payment method below.`;
+        document.getElementById('modal-stripe-btn').href = stripeUrl;
+        document.getElementById('modal-buttons').style.display = 'flex';
+      } else {
+        // For prints: show email option
+        document.getElementById('modal-body').textContent = `To purchase "${title}" (${price}), email Charlotte directly. She can provide details on print sizes, materials, and shipping.`;
+        document.getElementById('modal-buttons').innerHTML = '<a href="mailto:crcarkuff@gmail.com?subject=Purchase Inquiry: ' + encodeURIComponent(title) + '&body=Hi Charlotte! I\'m interested in purchasing "' + title + '" (' + price + '). Could you share details on available sizes and pricing?" class="modal-btn-primary">Email Charlotte</a>';
+      }
+      
       document.getElementById('modal-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
