@@ -361,20 +361,92 @@
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      .page-header { flex-direction: column; align-items: flex-start; padding: 6rem 2rem 2rem; }
-      .gallery-wrap { padding: 2rem; }
-      .masonry { columns: 2; }
-      .lightbox-inner { flex-direction: column; max-width: 95vw; }
-      .lightbox-inner img { max-width: 90vw; }
-      footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
-    }
+   @media (max-width: 900px) {
+  nav {
+    padding: 1.2rem 1.5rem;
+  }
 
-    @media (max-width: 500px) {
-      .masonry { columns: 1; }
-    }
+  .nav-links {
+    display: none;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 6rem 2rem 2rem;
+  }
+
+  .gallery-wrap {
+    padding: 1.5rem;
+  }
+
+  .masonry {
+    columns: 2;
+    column-gap: 0.9rem;
+  }
+
+  .gallery-item {
+    margin-bottom: 0.9rem;
+  }
+
+  .lightbox-inner {
+    flex-direction: column;
+    max-width: 95vw;
+  }
+
+  .lightbox-inner img {
+    max-width: 90vw;
+  }
+
+  footer {
+    padding: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .gallery-wrap {
+    padding: 1rem;
+  }
+
+  .masonry {
+    columns: 2;
+    column-gap: 0.7rem;
+  }
+
+  .gallery-item {
+    margin-bottom: 0.7rem;
+  }
+
+  /* Always show artwork title on mobile */
+  .gallery-item-overlay {
+    opacity: 1;
+    background: linear-gradient(
+      to top,
+      rgba(42,38,32,0.65) 0%,
+      transparent 60%
+    );
+  }
+
+  .gallery-item-overlay h3 {
+    font-size: 0.9rem;
+  }
+
+  .gallery-item-overlay p {
+    font-size: 0.62rem;
+  }
+
+  .filter-tabs {
+    width: 100%;
+  }
+
+  .filter-btn {
+    flex: 1;
+    text-align: center;
+  }
+}
   </style>
 </head>
 <body>
