@@ -343,6 +343,12 @@
 
     @media (max-width: 500px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-badge { display: none; }
+      
+      /* Subtle accent for newest piece */
+      .product-card:nth-child(1) .product-img {
+        border-left: 3px solid var(--gold);
+      }
     }
 
     @media (max-width: 900px) {
@@ -412,21 +418,6 @@
     <div class="product-grid">
 
       <div class="product-card">
-        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536', 'From the Heart', 'Gouache on canvas · 11×14 in', '$130')">
-          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536" alt="Original Painting" />
-          <span class="product-badge">Original</span>
-        </div>
-        <div class="product-info">
-          <h3>From the Heart</h3>
-          <p class="meta">Gouache on canvas · 11×14 in</p>
-          <div class="product-footer">
-            <div class="product-price">$130</div>
-            <button class="product-btn buy" onclick="openModal('From the Heart', '$130', 'https://buy.stripe.com/fZudRa5EH7Mq4ckbzXcEw0J')">Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card">
         <div class="product-img" onclick="openProductLightbox('Matthew 14:31.jpg', 'Matthew 14:31', 'Oil on canvas · 11×14 in', '$150')">
           <img src="Matthew 14:31.jpg" alt="Original Painting" />
           <span class="product-badge new">Newest</span>
@@ -452,6 +443,21 @@
           <div class="product-footer">
             <div class="product-price">$150</div>
             <button class="product-btn buy" onclick="openModal('Tyler Durden', '$150', 'https://buy.stripe.com/3cIcN67MPeaOfV26fDcEw0P')">Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536', 'From the Heart', 'Gouache on canvas · 11×14 in', '$130')">
+          <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536" alt="Original Painting" />
+          <span class="product-badge">Original</span>
+        </div>
+        <div class="product-info">
+          <h3>From the Heart</h3>
+          <p class="meta">Gouache on canvas · 11×14 in</p>
+          <div class="product-footer">
+            <div class="product-price">$130</div>
+            <button class="product-btn buy" onclick="openModal('From the Heart', '$130', 'https://buy.stripe.com/fZudRa5EH7Mq4ckbzXcEw0J')">Buy</button>
           </div>
         </div>
       </div>
