@@ -432,6 +432,82 @@
     .social-link:hover { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
     .social-link svg { width: 14px; height: 14px; }
 
+    /* ── Newsletter ── */
+    .newsletter-section {
+      background: var(--cream-dark);
+      padding: 4rem 5rem;
+      text-align: center;
+      border-top: 1px solid rgba(45,74,53,0.1);
+    }
+
+    .newsletter-section .section-label { margin-bottom: 0.6rem; }
+
+    .newsletter-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-bottom: 0.6rem;
+    }
+
+    .newsletter-section h2 em { font-style: italic; color: var(--green); }
+
+    .newsletter-section p {
+      font-size: 0.88rem;
+      color: var(--charcoal-soft);
+      margin-bottom: 1.8rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input[type="email"] {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.75rem 1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      border: 1.5px solid rgba(45,74,53,0.25);
+      border-radius: 2px;
+      background: var(--white);
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-form input[type="email"]:focus { border-color: var(--green); }
+
+    .newsletter-form button {
+      background: var(--green);
+      color: var(--cream);
+      border: none;
+      padding: 0.75rem 1.8rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .newsletter-form button:hover { background: var(--green-light); transform: translateY(-1px); }
+
+    .newsletter-success {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--green);
+      margin-top: 1rem;
+    }
+
     footer {
       background: var(--charcoal);
       padding: 3rem 5rem;
@@ -456,10 +532,6 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
 
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -474,6 +546,7 @@
       .about-strip { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
       .social-section { flex-direction: column; align-items: flex-start; padding: 3rem 2rem; }
       .social-links { flex-wrap: wrap; }
+      .newsletter-section { padding: 3rem 2rem; }
       footer { padding: 2rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -580,77 +653,89 @@
   </section>
 
   <!-- SOCIAL -->
-<div class="social-section">
-  <div style="max-width: 1100px; margin: 0 auto; width: 100%;">
-    <div style="text-align: center; margin-bottom: 2.5rem;">
-      <p class="section-label">Follow Along</p>
-      <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300; color: var(--charcoal);">Latest from <em style="font-style: italic; color: var(--green);">social</em></h2>
-      <p style="font-size: 0.9rem; color: var(--charcoal-soft); margin-top: 0.5rem;">Behind the scenes, new work, and more</p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 2rem;">
-
-      <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(45,74,53,0.12); background: var(--cream-dark);">
-        <div style="aspect-ratio: 9/16; position: relative; background: var(--green);">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
-            <source src="Justin Beiber Daises Tiktok.MP4" type="video/mp4" />
-          </video>
-          <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; padding: 2px 8px; display: flex; align-items: center; gap: 4px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
-            <span style="font-size: 10px; color: white; letter-spacing: 0.05em; font-family: 'Jost', sans-serif;">TikTok</span>
-          </div>
-          <div style="position: absolute; bottom: 8px; left: 8px; right: 8px;">
-            <p style="font-size: 10px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.4; font-family: 'Jost', sans-serif;">Justin Bieber & Hailey Bieber - painting progess</p>
-          </div>
-        </div>
+  <div class="social-section">
+    <div style="max-width: 1100px; margin: 0 auto; width: 100%;">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <p class="section-label">Follow Along</p>
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300; color: var(--charcoal);">Latest from <em style="font-style: italic; color: var(--green);">social</em></h2>
+        <p style="font-size: 0.9rem; color: var(--charcoal-soft); margin-top: 0.5rem;">Behind the scenes, new work, and more</p>
       </div>
 
-      <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(45,74,53,0.12); background: var(--cream-dark);">
-        <div style="aspect-ratio: 9/16; position: relative; background: var(--green);">
-          <img src="Jesus and Peter Progress Story.JPG" alt="Jesus and Peter Progress" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-          <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; padding: 2px 8px; display: flex; align-items: center; gap: 4px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
-            <span style="font-size: 10px; color: white; letter-spacing: 0.05em; font-family: 'Jost', sans-serif;">Insta</span>
-          </div>
-          <div style="position: absolute; bottom: 8px; left: 8px; right: 8px;">
-            <p style="font-size: 10px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.4; font-family: 'Jost', sans-serif;">Jesus and Peter — painting progress</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 2rem;">
+
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(45,74,53,0.12); background: var(--cream-dark);">
+          <div style="aspect-ratio: 9/16; position: relative; background: var(--green);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="Justin Beiber Daises Tiktok.MP4" type="video/mp4" />
+            </video>
+            <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; padding: 2px 8px; display: flex; align-items: center; gap: 4px;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+              <span style="font-size: 10px; color: white; letter-spacing: 0.05em; font-family: 'Jost', sans-serif;">TikTok</span>
+            </div>
+            <div style="position: absolute; bottom: 8px; left: 8px; right: 8px;">
+              <p style="font-size: 10px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.4; font-family: 'Jost', sans-serif;">Justin Bieber & Hailey Bieber - painting progress</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(45,74,53,0.12); background: var(--cream-dark);">
-        <div style="aspect-ratio: 9/16; position: relative; background: var(--green);">
-          <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
-            <source src="Vandy Cornhole Boards.MP4" type="video/mp4" />
-          </video>
-          <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; padding: 2px 8px; display: flex; align-items: center; gap: 4px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
-            <span style="font-size: 10px; color: white; letter-spacing: 0.05em; font-family: 'Jost', sans-serif;">Insta</span>
-          </div>
-          <div style="position: absolute; bottom: 8px; left: 8px; right: 8px;">
-            <p style="font-size: 10px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.4; font-family: 'Jost', sans-serif;">Vandy cornhole boards — custom commission</p>
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(45,74,53,0.12); background: var(--cream-dark);">
+          <div style="aspect-ratio: 9/16; position: relative; background: var(--green);">
+            <img src="Jesus and Peter Progress Story.JPG" alt="Jesus and Peter Progress" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; padding: 2px 8px; display: flex; align-items: center; gap: 4px;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+              <span style="font-size: 10px; color: white; letter-spacing: 0.05em; font-family: 'Jost', sans-serif;">Insta</span>
+            </div>
+            <div style="position: absolute; bottom: 8px; left: 8px; right: 8px;">
+              <p style="font-size: 10px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.4; font-family: 'Jost', sans-serif;">Jesus and Peter — painting progress</p>
+            </div>
           </div>
         </div>
+
+        <div style="border-radius: 8px; overflow: hidden; border: 1px solid rgba(45,74,53,0.12); background: var(--cream-dark);">
+          <div style="aspect-ratio: 9/16; position: relative; background: var(--green);">
+            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              <source src="Vandy Cornhole Boards.MP4" type="video/mp4" />
+            </video>
+            <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); border-radius: 4px; padding: 2px 8px; display: flex; align-items: center; gap: 4px;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
+              <span style="font-size: 10px; color: white; letter-spacing: 0.05em; font-family: 'Jost', sans-serif;">Insta</span>
+            </div>
+            <div style="position: absolute; bottom: 8px; left: 8px; right: 8px;">
+              <p style="font-size: 10px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.4; font-family: 'Jost', sans-serif;">Vandy cornhole boards — custom commission</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-    </div>
-
-    <div style="text-align: center; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="https://www.instagram.com/char_paintz/" target="_blank" class="social-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        Instagram
-      </a>
-      <a href="https://www.tiktok.com/@charlottecarkuff" target="_blank" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
-        TikTok
-      </a>
-      <a href="https://www.youtube.com/@charlotte_carkuff" target="_blank" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </a>
+      <div style="text-align: center; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://www.instagram.com/char_paintz/" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.tiktok.com/@charlottecarkuff" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+          TikTok
+        </a>
+        <a href="https://www.youtube.com/@charlotte_carkuff" target="_blank" class="social-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+      </div>
     </div>
   </div>
-</div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter-section">
+    <p class="section-label">Stay in the Loop</p>
+    <h2>New work, updates &amp; <em>behind the scenes</em></h2>
+    <p>Drop your email and I'll let you know when new pieces drop, commissions open up, or something exciting is happening.</p>
+    <form class="newsletter-form" id="newsletter-form">
+      <input type="email" placeholder="your@email.com" required />
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="newsletter-success" id="newsletter-success">Thank you! You're on the list. ✦</p>
+  </div>
 
   <footer>
     <div class="footer-logo">Charlotte Carkuff <em>Art</em></div>
@@ -667,16 +752,14 @@
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.toggle('open');
     });
-  <script>
+
     const newsletterForm = document.getElementById('newsletter-form');
-    if (newsletterForm) {
-      newsletterForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = newsletterForm.querySelector('input[type="email"]').value;
-        alert(`Thank you for subscribing with ${email}!`);
-        newsletterForm.reset();
-      });
-    }
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      newsletterForm.style.display = 'none';
+      document.getElementById('newsletter-success').style.display = 'block';
+    });
   </script>
+
 </body>
 </html>
