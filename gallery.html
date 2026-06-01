@@ -139,8 +139,18 @@
     }
 
     .masonry {
-      columns: 3;
-      column-gap: 1.2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: max-content;
+      gap: 1.2rem;
+    }
+
+    .gallery-item:nth-child(odd) {
+      grid-column: 1;
+    }
+
+    .gallery-item:nth-child(even) {
+      grid-column: 2;
     }
 
     .gallery-item {
@@ -381,8 +391,8 @@
   }
 
   .masonry {
-    columns: 2;
-    column-gap: 0.9rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
   }
 
   .gallery-item {
@@ -412,8 +422,8 @@
   }
 
   .masonry {
-    columns: 2;
-    column-gap: 0.7rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
   }
 
   .gallery-item {
