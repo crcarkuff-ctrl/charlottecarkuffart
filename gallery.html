@@ -6,6 +6,49 @@
   <title>Gallery — Charlotte Carkuff Art</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
+    .nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--green);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px; left: 0; right: 0;
+  background: rgba(247, 242, 234, 0.98);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(45,74,53,0.1);
+  padding: 1.5rem 2rem;
+  flex-direction: column;
+  gap: 1.2rem;
+  z-index: 99;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a {
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--charcoal-soft);
+}
+.nav-mobile-menu a:last-child { color: var(--green); font-weight: 500; }
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
     :root {
       --cream: #f7f2ea;
       --cream-dark: #ede6d6;
@@ -344,6 +387,15 @@
       <li><a href="about.html">About</a></li>
       <li><a href="commission.html" class="nav-cta">Commission</a></li>
     </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="gallery.html">Work</a>
+  <a href="shop.html">Shop</a>
+  <a href="about.html">About</a>
+  <a href="commission.html">Commission</a>
+</div>
   </nav>
 
   <header class="page-header">
@@ -619,5 +671,12 @@
       document.body.style.overflow = '';
     }
   </script>
+  <script>
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+</script>
 </body>
 </html>
