@@ -427,7 +427,7 @@
     <div class="product-grid">
 
       <div class="product-card">
-        <div class="product-img" onclick="openProductLightbox('Matthew 14:31.jpg', 'Matthew 14:31', 'Oil on canvas · 11×14 in', '$150')">
+        <div class="product-img" onclick="openProductLightbox('Matthew 14:31.jpg', 'Matthew 14:31', 'Oil on canvas · 11×14 in', '$150', 'https://buy.stripe.com/28E5kE2sv9UyaAI47vcEw0Q')">
           <img src="Matthew 14:31.jpg" alt="Original Painting" />
           <span class="product-badge new">Newest</span>
         </div>
@@ -442,7 +442,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5720.jpg?w=1536', 'Tyler Durden', 'Oil on canvas · 11×14 in', '$200')">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5720.jpg?w=1536', 'Tyler Durden', 'Oil on canvas · 11×14 in', '$200', 'https://buy.stripe.com/3cIcN67MPeaOfV26fDcEw0P')">
           <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5720.jpg?w=1536" alt="Original Painting" />
           <span class="product-badge">Original</span>
         </div>
@@ -457,7 +457,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536', 'From the Heart', 'Gouache on canvas · 11×14 in', '$130')">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536', 'From the Heart', 'Gouache on canvas · 11×14 in', '$130', 'https://buy.stripe.com/fZudRa5EH7Mq4ckbzXcEw0J')">
           <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/img_5770.jpg?w=1536" alt="Original Painting" />
           <span class="product-badge">Original</span>
         </div>
@@ -472,7 +472,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/t.s.-2.jpg?w=1630', 'Big Reputation', 'Oil on canvas · 12×16 in', '$250')">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/t.s.-2.jpg?w=1630', 'Big Reputation', 'Oil on canvas · 12×16 in', '$250', 'https://buy.stripe.com/bJe8wQ0knfeS24cavTcEw0O')">
           <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/04/t.s.-2.jpg?w=1630" alt="Big Reputation" />
           <span class="product-badge">Original</span>
         </div>
@@ -487,7 +487,7 @@
       </div>
 
       <div class="product-card">
-        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4407-1.jpg', 'JT Drown Performance', 'Oil on canvas · 18×24 in', '$450')">
+        <div class="product-img" onclick="openProductLightbox('https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4407-1.jpg', 'JT Drown Performance', 'Oil on canvas · 18×24 in', '$450', 'https://buy.stripe.com/4gM00k9UXc2GgZ61ZncEw0N')">
           <img src="https://carkuffpaints.wordpress.com/wp-content/uploads/2025/03/img_4407-1.jpg" alt="Original Painting" />
           <span class="product-badge">Original</span>
         </div>
@@ -654,8 +654,16 @@
       <div class="product-lightbox-info">
         <h2 id="product-lightbox-title"></h2>
         <span class="meta" id="product-lightbox-meta"></span>
-        <div class="price" id="product-lightbox-price"></div>
-        <div class="btn-group">
+       <div class="price" id="product-lightbox-price"></div>
+
+<p id="product-lightbox-description" style="
+margin-bottom:1.5rem;
+line-height:1.7;
+font-size:0.9rem;
+color:rgba(247,242,234,0.8);
+"></p>
+
+<div class="btn-group">
           <button class="product-btn buy" id="product-lightbox-buy" style="width: 100%; text-align: center;">Buy</button>
         </div>
       </div>
@@ -726,26 +734,30 @@
     });
 
     // Product Lightbox
-    function openProductLightbox(imgSrc, title, meta, price) {
-      document.getElementById('product-lightbox-img').src = imgSrc;
-      document.getElementById('product-lightbox-img').alt = title;
-      document.getElementById('product-lightbox-title').textContent = title;
-      document.getElementById('product-lightbox-meta').textContent = meta;
-      document.getElementById('product-lightbox-price').textContent = price;
-      
-      document.getElementById('product-lightbox-inquire').onclick = () => {
-        closeProductLightbox();
-        openModal(title, price);
-      };
-      
-      document.getElementById('product-lightbox-buy').onclick = () => {
-        closeProductLightbox();
-        openModal(title, price);
-      };
-      
-      document.getElementById('product-lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
+  function openProductLightbox(imgSrc, title, meta, price, stripeUrl = null, description = '') {
+
+  document.getElementById('product-lightbox-img').src = imgSrc;
+  document.getElementById('product-lightbox-img').alt = title;
+
+  document.getElementById('product-lightbox-title').textContent = title;
+  document.getElementById('product-lightbox-meta').textContent = meta;
+  document.getElementById('product-lightbox-price').textContent = price;
+
+  document.getElementById('product-lightbox-description').textContent = description;
+
+  document.getElementById('product-lightbox-buy').onclick = () => {
+    closeProductLightbox();
+
+    if (stripeUrl) {
+      openModal(title, price, stripeUrl);
+    } else {
+      openModal(title, price);
     }
+  };
+
+  document.getElementById('product-lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
     function closeProductLightbox() {
       document.getElementById('product-lightbox').classList.remove('open');
